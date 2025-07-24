@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+        
+    <!-- Página Principal -->
+    <url>
+        <loc>https://restaurantetasty.com/</loc>
+        <lastmod>2024-12-23</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_1.jpeg</image:loc>
+            <image:title>Restaurante Tasty - Ambiente Elegante</image:title>
+            <image:caption>Salón principal con iluminación cálida y decoración sofisticada</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_8.jpeg</image:loc>
+            <image:title>Especialidad del Chef - Salmón a la Parrilla</image:title>
+            <image:caption>Salmón atlántico con quinoa tricolor y reducción de vino blanco</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- Página de Menú -->
+    <url>
+        <loc>https://restaurantetasty.com/menu.html</loc>
+        <lastmod>2024-12-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_8.jpeg</image:loc>
+            <image:title>Menú Gourmet - Especialidad del Chef</image:title>
+            <image:caption>Salmón a la parrilla con quinoa tricolor, especialidad de la casa</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_9.jpeg</image:loc>
+            <image:title>Pasta Artesanal</image:title>
+            <image:caption>Pasta fresca hecha en casa con salsa de tomates San Marzano</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_7.jpeg</image:loc>
+            <image:title>Postre Signature - Tiramisú</image:title>
+            <image:caption>Tiramisú clásico con toque especial de café espresso</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- Página de Galería -->
+    <url>
+        <loc>https://restaurantetasty.com/gallery.html</loc>
+        <lastmod>2024-12-23</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_1.jpeg</image:loc>
+            <image:title>Ambiente - Salón Principal</image:title>
+            <image:caption>Ambiente elegante con iluminación cálida y decoración sofisticada</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_2.jpeg</image:loc>
+            <image:title>Ambiente - Área VIP</image:title>
+            <image:caption>Espacio exclusivo para ocasiones especiales y celebraciones íntimas</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_3.jpeg</image:loc>
+            <image:title>Ambiente - Terraza Exterior</image:title>
+            <image:caption>Comedor al aire libre con vista panorámica y ambiente relajado</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_4.jpeg</image:loc>
+            <image:title>Ambiente - Área del Bar</image:title>
+            <image:caption>Barra de cócteles con ambiente sofisticado y mixología premium</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_5.jpeg</image:loc>
+            <image:title>Eventos - Celebración Familiar</image:title>
+            <image:caption>Reuniones familiares en un ambiente cálido y acogedor</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_6.jpeg</image:loc>
+            <image:title>Platos - Presentación Gourmet</image:title>
+            <image:caption>Presentación artística de alta cocina con ingredientes de temporada</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- Página de Reservaciones -->
+    <url>
+        <loc>https://restaurantetasty.com/reservation.html</loc>
+        <lastmod>2024-12-23</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_5.jpeg</image:loc>
+            <image:title>Reservaciones - Mesa para Eventos Especiales</image:title>
+            <image:caption>Reserva tu mesa para celebraciones familiares y eventos especiales</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- Página de Contacto -->
+    <url>
+        <loc>https://restaurantetasty.com/contact.html</loc>
+        <lastmod>2024-12-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_1.jpeg</image:loc>
+            <image:title>Contacto - Ubicación Restaurante Tasty</image:title>
+            <image:caption>Visítanos en Av. Reforma 123, Ciudad de México</image:caption>
+        </image:image>
+    </url>
+    
+</urlset>

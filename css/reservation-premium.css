@@ -1,0 +1,695 @@
+/*
+SISTEMA DE RESERVACIONES PREMIUM - RESTAURANTE TASTY
+Estilos avanzados para formulario de reservaciones con validaciones y UX mejorada
+*/
+
+/* Variables CSS para el tema de reservaciones */
+:root {
+    --reservation-primary: #ea272d;
+    --reservation-success: #28a745;
+    --reservation-error: #dc3545;
+    --reservation-warning: #ffc107;
+    --reservation-bg: rgba(0, 0, 0, 0.9);
+    --reservation-text: rgba(255, 255, 255, 0.9);
+    --reservation-text-muted: rgba(255, 255, 255, 0.6);
+    --reservation-border: rgba(255, 255, 255, 0.1);
+    --reservation-shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor principal del formulario */
+#fh5co-reservation-form {
+    background: var(--reservation-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+#fh5co-reservation-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../images/broken_noise.png') repeat;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* Título y descripción */
+#fh5co-reservation-form .fh5co-heading h2 {
+    color: var(--reservation-text);
+    font-size: 42px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+#fh5co-reservation-form .fh5co-heading h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--reservation-primary);
+    border-radius: 2px;
+}
+
+#fh5co-reservation-form .fh5co-heading p {
+    color: var(--reservation-text-muted);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Formulario principal */
+#form-wrap {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid var(--reservation-border);
+    box-shadow: 0 20px 60px var(--reservation-shadow);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 2;
+}
+
+/* Grupos de formulario */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    color: var(--reservation-text);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+    font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+/* Campos de entrada */
+.form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--reservation-border);
+    color: var(--reservation-text);
+    padding: 15px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--reservation-primary);
+    box-shadow: 0 0 0 3px rgba(234, 39, 45, 0.2);
+    outline: none;
+    color: var(--reservation-text);
+}
+
+.form-control::placeholder {
+    color: var(--reservation-text-muted);
+    opacity: 1;
+}
+
+/* Select personalizado */
+.custom_select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 20px;
+    padding-right: 50px;
+}
+
+.custom_select option {
+    background: #1a1a1a;
+    color: var(--reservation-text);
+    padding: 10px;
+}
+
+.custom_select option:disabled {
+    color: var(--reservation-text-muted);
+    background: #333;
+}
+
+.custom_select option.recommended {
+    background: rgba(234, 39, 45, 0.2);
+    color: #fff;
+}
+
+/* Grupos de opciones en select */
+.custom_select optgroup {
+    background: #2a2a2a;
+    color: var(--reservation-primary);
+    font-weight: 600;
+    font-style: normal;
+    padding: 10px;
+}
+
+/* Información de slots de tiempo */
+.time-slots-info {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--reservation-border);
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.time-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--reservation-text-muted);
+    font-size: 14px;
+}
+
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+}
+
+.legend-item.available .legend-dot {
+    background: var(--reservation-success);
+}
+
+.legend-item.recommended .legend-dot {
+    background: var(--reservation-primary);
+    box-shadow: 0 0 8px rgba(234, 39, 45, 0.5);
+}
+
+.legend-item.unavailable .legend-dot {
+    background: var(--reservation-text-muted);
+}
+
+/* Estados de validación */
+.form-control.error {
+    border-color: var(--reservation-error);
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
+}
+
+.field-error {
+    color: var(--reservation-error);
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+    font-weight: 500;
+}
+
+.field-error::before {
+    content: '⚠ ';
+    margin-right: 5px;
+}
+
+/* Botón de envío */
+.btn-primary.btn-outline {
+    background: transparent;
+    border: 2px solid var(--reservation-primary);
+    color: var(--reservation-primary);
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary.btn-outline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--reservation-primary);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.btn-primary.btn-outline:hover {
+    color: #fff;
+    border-color: var(--reservation-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(234, 39, 45, 0.4);
+}
+
+.btn-primary.btn-outline:hover::before {
+    left: 0;
+}
+
+.btn-primary.btn-outline:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Mensaje de éxito */
+.reservation-success {
+    background: rgba(40, 167, 69, 0.1);
+    border: 2px solid var(--reservation-success);
+    color: var(--reservation-success);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    animation: slideInDown 0.5s ease;
+}
+
+.reservation-success i {
+    font-size: 24px;
+    margin-right: 10px;
+    color: var(--reservation-success);
+}
+
+.reservation-success strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.reservation-success p {
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Animaciones */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efectos de focus mejorados */
+.form-control:focus + .field-error {
+    display: none;
+}
+
+/* Textarea específico */
+textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    #form-wrap {
+        padding: 25px;
+        margin: 20px 10px;
+    }
+    
+    #fh5co-reservation-form .fh5co-heading h2 {
+        font-size: 32px;
+    }
+    
+    .form-control {
+        padding: 12px 15px;
+        font-size: 16px; /* Evita zoom en iOS */
+    }
+    
+    .time-legend {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .legend-item {
+        justify-content: center;
+    }
+    
+    .btn-primary.btn-outline {
+        width: 100%;
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .form-group .col-md-6 {
+        margin-bottom: 15px;
+    }
+    
+    .time-slots-info {
+        padding: 10px;
+    }
+    
+    .legend-item {
+        font-size: 12px;
+    }
+    
+    .legend-dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* Mejoras de accesibilidad */
+.form-control:focus {
+    outline: 2px solid var(--reservation-primary);
+    outline-offset: 2px;
+}
+
+.btn-primary.btn-outline:focus {
+    outline: 2px solid var(--reservation-primary);
+    outline-offset: 4px;
+}
+
+/* Estados hover para campos */
+.form-control:hover:not(:focus) {
+    border-color: rgba(234, 39, 45, 0.3);
+}
+
+/* Indicador de campo requerido */
+.form-group label[for] {
+    position: relative;
+}
+
+.form-control[required] + label::after,
+label[for] + .form-control[required]::after {
+    content: '*';
+    color: var(--reservation-primary);
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+/* DATE PICKER PERSONALIZADO PREMIUM */
+.custom-date-picker {
+    position: relative;
+    width: 100%;
+}
+
+.date-display {
+    cursor: pointer;
+    padding-right: 50px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 2px solid var(--reservation-border) !important;
+    color: var(--reservation-text) !important;
+    transition: all 0.3s ease !important;
+}
+
+.date-display:focus {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: var(--reservation-primary) !important;
+    box-shadow: 0 0 0 3px rgba(234, 39, 45, 0.2) !important;
+}
+
+.date-picker-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--reservation-text-muted);
+    font-size: 18px;
+    pointer-events: none;
+    transition: color 0.3s ease;
+}
+
+.custom-date-picker:hover .date-picker-icon {
+    color: var(--reservation-primary);
+}
+
+.date-picker-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    border: 2px solid var(--reservation-primary);
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    margin-top: 5px;
+}
+
+.date-picker-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.date-picker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid rgba(234, 39, 45, 0.2);
+    background: rgba(234, 39, 45, 0.1);
+}
+
+.date-picker-title {
+    flex: 1;
+    text-align: center;
+}
+
+.date-picker-title .month-year {
+    color: var(--reservation-text);
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.date-nav-btn {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: var(--reservation-text);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.date-nav-btn:hover {
+    background: var(--reservation-primary);
+    border-color: var(--reservation-primary);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.date-picker-calendar {
+    padding: 20px;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.weekday {
+    text-align: center;
+    color: var(--reservation-primary);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--reservation-text);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 40px;
+}
+
+.calendar-day:hover:not(.disabled):not(.other-month) {
+    background: rgba(234, 39, 45, 0.2);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.calendar-day.today {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--reservation-primary);
+    font-weight: 700;
+}
+
+.calendar-day.today::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--reservation-primary);
+    border-radius: 50%;
+}
+
+.calendar-day.selected {
+    background: var(--reservation-primary) !important;
+    color: #fff !important;
+    font-weight: 700;
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(234, 39, 45, 0.4);
+}
+
+.calendar-day.disabled {
+    color: var(--reservation-text-muted);
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
+.calendar-day.other-month {
+    color: rgba(255, 255, 255, 0.3);
+    cursor: default;
+}
+
+.date-picker-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-top: 1px solid rgba(234, 39, 45, 0.2);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.date-picker-today,
+.date-picker-clear {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--reservation-text);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.date-picker-today:hover {
+    background: var(--reservation-primary);
+    border-color: var(--reservation-primary);
+    color: #fff;
+}
+
+.date-picker-clear:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Animaciones para el date picker */
+@keyframes datePickerSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.date-picker-dropdown.show {
+    animation: datePickerSlideIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Responsive para date picker */
+@media screen and (max-width: 768px) {
+    .date-picker-dropdown {
+        left: -10px;
+        right: -10px;
+    }
+
+    .date-picker-header {
+        padding: 15px;
+    }
+
+    .date-picker-title .month-year {
+        font-size: 16px;
+    }
+
+    .date-nav-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+    .date-picker-calendar {
+        padding: 15px;
+    }
+
+    .calendar-day {
+        min-height: 35px;
+        font-size: 13px;
+    }
+
+    .weekday {
+        font-size: 12px;
+        padding: 8px 3px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .date-picker-dropdown {
+        position: fixed;
+        top: 50%;
+        left: 10px;
+        right: 10px;
+        transform: translateY(-50%);
+        margin-top: 0;
+    }
+
+    .date-picker-dropdown.show {
+        transform: translateY(-50%);
+    }
+
+    .calendar-day {
+        min-height: 30px;
+        font-size: 12px;
+    }
+}
+
+/* Estilos para campos de fecha y hora lado a lado */
+.form-group .row .col-md-6:first-child {
+    padding-right: 10px;
+}
+
+.form-group .row .col-md-6:last-child {
+    padding-left: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .form-group .row .col-md-6 {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}

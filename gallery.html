@@ -3,11 +3,37 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Tasty &mdash; Free Website Template, Free HTML5 Template by freehtml5.co</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="freehtml5.co" />
+	<title>Galería - Restaurante Tasty | Ambiente Elegante y Especialidades Gastronómicas</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Descubre el ambiente elegante de Restaurante Tasty. Galería de fotos de nuestros espacios VIP, platos gourmet, eventos especiales y cocina abierta." />
+	<meta name="keywords" content="galería restaurante, ambiente elegante, espacios VIP, platos gourmet, eventos especiales, cocina abierta, fotos restaurante" />
+	<meta name="author" content="Restaurante Tasty" />
+
+	<!-- SEO Avanzado -->
+	<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+	<meta name="googlebot" content="index, follow">
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Galería - Restaurante Tasty | Ambiente Elegante">
+	<meta property="og:description" content="Descubre el ambiente elegante de Restaurante Tasty. Galería de fotos de espacios VIP, platos gourmet y eventos especiales.">
+	<meta property="og:url" content="https://restaurantetasty.com/gallery.html">
+	<meta property="og:site_name" content="Restaurante Tasty">
+	<meta property="og:locale" content="es_MX">
+	<meta property="og:image" content="https://restaurantetasty.com/images/gallery_2.jpeg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:image:alt" content="Galería - Ambiente elegante del restaurante">
+
+	<!-- Twitter Cards -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@restaurantetasty">
+	<meta name="twitter:title" content="Galería - Restaurante Tasty">
+	<meta name="twitter:description" content="Descubre nuestro ambiente elegante y especialidades gastronómicas.">
+	<meta name="twitter:image" content="https://restaurantetasty.com/images/gallery_2.jpeg">
+
+	<!-- Canonical URL -->
+	<link rel="canonical" href="https://restaurantetasty.com/gallery.html">
 
 	<!-- 
 	//////////////////////////////////////////////////////
@@ -36,11 +62,41 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,600i,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+
+	<!-- PWA Meta Tags -->
+	<meta name="theme-color" content="#ea272d">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-web-app-title" content="Restaurante Tasty">
+	<meta name="msapplication-TileColor" content="#ea272d">
+	<meta name="msapplication-TileImage" content="/images/icons/icon-144x144.png">
+	<meta name="mobile-web-app-capable" content="yes">
+
+	<!-- PWA Manifest -->
+	<link rel="manifest" href="/manifest.json">
+
+	<!-- PWA Icons -->
+	<link rel="apple-touch-icon" sizes="72x72" href="/images/icons/icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="96x96" href="/images/icons/icon-96x96.png">
+	<link rel="apple-touch-icon" sizes="128x128" href="/images/icons/icon-128x128.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/images/icons/icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/images/icons/icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="192x192" href="/images/icons/icon-192x192.png">
+	<link rel="apple-touch-icon" sizes="384x384" href="/images/icons/icon-384x384.png">
+	<link rel="apple-touch-icon" sizes="512x512" href="/images/icons/icon-512x512.png">
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+	<link rel="shortcut icon" href="/images/icons/favicon.ico">
 	
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
 	<link rel="stylesheet" href="css/icomoon.css">
+
+	<!-- Font Awesome para WhatsApp -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
 
@@ -49,6 +105,12 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Gallery Premium CSS -->
+	<link rel="stylesheet" href="css/gallery-premium.css">
+
+	<!-- WhatsApp Float CSS -->
+	<link rel="stylesheet" href="css/whatsapp-float.css">
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -109,69 +171,9 @@
 		</div>
 	</header>
 
-	
+
 	<div id="fh5co-gallery" class="fh5co-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 fh5co-heading animate-box">
-					<h2 data-translate="pages.gallery.main.title">Momentos Especiales</h2>
-					<div class="row">
-						<div class="col-md-6">
-							<p data-translate="pages.gallery.main.description">Descubre la atmósfera única de nuestro restaurante a través de estas imágenes que capturan la esencia de la experiencia gastronómica que ofrecemos a nuestros comensales.</p>
-						</div>
-					</div>
-				</div>
-				
-
-				<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_1.jpeg);" data-trigger="zoomerang"></div>
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_2.jpeg);" data-trigger="zoomerang"></div>
-				</div>
-				<div class="col-md-6 col-sm-6 fh5co-gallery_item">
-					<div class="fh5co-bg-img fh5co-gallery_big" style="background-image: url(images/gallery_8.jpeg);" data-trigger="zoomerang"></div>
-				</div>
-				<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_4.jpeg);" data-trigger="zoomerang"></div>
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_5.jpeg);" data-trigger="zoomerang"></div>
-				</div>
-
-				<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_5.jpeg);" data-trigger="zoomerang"></div>
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_6.jpeg);" data-trigger="zoomerang"></div>
-				</div>
-				<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_7.jpeg);" data-trigger="zoomerang"></div>
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_8.jpeg);" data-trigger="zoomerang"></div>
-				</div>
-				<div class="col-md-6 col-sm-6 fh5co-gallery_item">
-					<div class="fh5co-bg-img fh5co-gallery_big" style="background-image: url(images/gallery_9.jpeg);" data-trigger="zoomerang"></div>
-				</div>
-
-				<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_1.jpeg);" data-trigger="zoomerang"></div>
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_2.jpeg);" data-trigger="zoomerang"></div>
-				</div>
-				<div class="col-md-6 col-sm-6 fh5co-gallery_item">
-					<div class="fh5co-bg-img fh5co-gallery_big" style="background-image: url(images/gallery_8.jpeg);" data-trigger="zoomerang"></div>
-				</div>
-				<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_4.jpeg);" data-trigger="zoomerang"></div>
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_5.jpeg);" data-trigger="zoomerang"></div>
-				</div>
-
-				<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_5.jpeg);" data-trigger="zoomerang"></div>
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_6.jpeg);" data-trigger="zoomerang"></div>
-				</div>
-				<div class="col-md-3 col-sm-3 fh5co-gallery_item">
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_7.jpeg);" data-trigger="zoomerang"></div>
-					<div class="fh5co-bg-img" style="background-image: url(images/gallery_8.jpeg);" data-trigger="zoomerang"></div>
-				</div>
-				<div class="col-md-6 col-sm-6 fh5co-gallery_item">
-					<div class="fh5co-bg-img fh5co-gallery_big" style="background-image: url(images/gallery_9.jpeg);" data-trigger="zoomerang"></div>
-				</div>
-			</div>
-		</div>
+		<!-- La estructura será generada dinámicamente por gallery-premium.js -->
 	</div>
 
 
@@ -206,10 +208,10 @@
 				<div class="col-md-4 col-md-push-1 fh5co-widget">
 					<h4 data-translate="footer.contact.title">Contáctanos</h4>
 					<ul class="fh5co-footer-links">
-						<li data-translate="footer.contact.address">Av. Reforma 1847, Col. Lomas de Chapultepec, <br> CDMX 11000</li>
-						<li><a href="tel://525555550123" data-translate="footer.contact.phone">+52 55 5555-0123</a></li>
-						<li><a href="mailto:reservas@restaurantetasty.com" data-translate="footer.contact.email">reservas@restaurantetasty.com</a></li>
-						<li><a href="#" onclick="return false;">Horarios: Lun-Dom 12:00-23:00</a></li>
+						<li data-contact="address" data-translate="footer.contact.address">Av. Reforma 1847, Col. Lomas de Chapultepec, <br> CDMX 11000</li>
+						<li><a href="tel://525555550123" data-contact="phone" data-translate="footer.contact.phone">+52 55 5555-0123</a></li>
+						<li><a href="mailto:reservas@restaurantetasty.com" data-contact="email" data-translate="footer.contact.email">reservas@restaurantetasty.com</a></li>
+						<li><a href="#" onclick="return false;" data-contact="hours">Horarios: Lun-Dom 12:00-23:00</a></li>
 					</ul>
 				</div>
 
@@ -260,16 +262,20 @@
 	<script src="js/translations.js"></script>
 	<script src="js/language-manager.js"></script>
 
-	<script>
-		Zoomerang
-      .config({
-        maxHeight: 600,
-        maxWidth: 900,
-        bgColor: '#000',
-        bgOpacity: .85
-      })
-      .listen('[data-trigger="zoomerang"]')
-	</script>
+	<!-- Gallery Premium JavaScript -->
+	<script src="js/gallery-premium.js"></script>
+
+	<!-- SEO Manager Avanzado -->
+	<script src="js/seo-manager.js"></script>
+
+	<!-- PWA Manager -->
+	<script src="js/pwa-manager.js"></script>
+
+	<!-- WhatsApp Integration -->
+	<script src="js/whatsapp-integration.js"></script>
+
+	<!-- Sistema de Datos Centralizados -->
+	<script src="js/data-system-init.js"></script>
 
 	</body>
 </html>

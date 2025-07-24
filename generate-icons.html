@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generador de Iconos - Restaurante Tasty</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .icon-preview { margin: 10px; display: inline-block; text-align: center; }
+        .icon-preview img { border: 1px solid #ccc; margin: 5px; }
+        canvas { border: 1px solid #ccc; margin: 5px; }
+        button { padding: 10px 20px; margin: 5px; background: #8B4513; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #A0522D; }
+    </style>
+</head>
+<body>
+    <h1>🍽️ Generador de Iconos - Restaurante Tasty</h1>
+    <p>Este script genera los iconos necesarios para el PWA y favicon.</p>
+    
+    <button onclick="generateIcons()">Generar Iconos</button>
+    <button onclick="downloadAll()">Descargar Todos</button>
+    
+    <div id="icons-container"></div>
+    
+    <script>
+        const iconSizes = [
+            { name: 'favicon-16x16.png', size: 16 },
+            { name: 'favicon-32x32.png', size: 32 },
+            { name: 'icon-144x144.png', size: 144 },
+            { name: 'icon-192x192.png', size: 192 },
+            { name: 'icon-512x512.png', size: 512 }
+        ];
+        
+        function generateIcon(size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Fondo marrón (color del restaurante)
+            const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+            gradient.addColorStop(0, '#D2691E');
+            gradient.addColorStop(1, '#8B4513');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // Borde redondeado
+            ctx.globalCompositeOperation = 'destination-in';
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, size * 0.125);
+            ctx.fill();
+            ctx.globalCompositeOperation = 'source-over';
+            
+            // Letra T
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size * 0.6}px serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('T', size/2, size/2);
+            
+            // Sombra para la letra
+            ctx.globalCompositeOperation = 'destination-over';
+            ctx.fillStyle = 'rgba(0,0,0,0.3)';
+            ctx.fillText('T', size/2 + 2, size/2 + 2);
+            
+            return canvas;
+        }
+        
+        function generateIcons() {
+            const container = document.getElementById('icons-container');
+            container.innerHTML = '<h2>Iconos Generados:</h2>';
+            
+            iconSizes.forEach(icon => {
+                const canvas = generateIcon(icon.size);
+                
+                const preview = document.createElement('div');
+                preview.className = 'icon-preview';
+                preview.innerHTML = `
+                    <div>${icon.name}</div>
+                    <div>${icon.size}x${icon.size}</div>
+                `;
+                preview.appendChild(canvas);
+                
+                const downloadBtn = document.createElement('button');
+                downloadBtn.textContent = 'Descargar';
+                downloadBtn.onclick = () => downloadIcon(canvas, icon.name);
+                preview.appendChild(downloadBtn);
+                
+                container.appendChild(preview);
+            });
+        }
+        
+        function downloadIcon(canvas, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+        
+        function downloadAll() {
+            iconSizes.forEach(icon => {
+                const canvas = generateIcon(icon.size);
+                setTimeout(() => downloadIcon(canvas, icon.name), icon.size); // Delay para evitar bloqueo
+            });
+        }
+        
+        // Generar automáticamente al cargar
+        window.onload = generateIcons;
+        
+        // Polyfill para roundRect si no está disponible
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+                this.beginPath();
+                this.moveTo(x + radius, y);
+                this.lineTo(x + width - radius, y);
+                this.quadraticCurveTo(x + width, y, x + width, y + radius);
+                this.lineTo(x + width, y + height - radius);
+                this.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+                this.lineTo(x + radius, y + height);
+                this.quadraticCurveTo(x, y + height, x, y + height - radius);
+                this.lineTo(x, y + radius);
+                this.quadraticCurveTo(x, y, x + radius, y);
+                this.closePath();
+            };
+        }
+    </script>
+</body>
+</html>

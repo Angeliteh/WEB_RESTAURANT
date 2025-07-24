@@ -107,6 +107,23 @@ const translations = {
                 tasting: {
                     name: "Menú Degustación 7 Tiempos",
                     description: "Viaje gastronómico de 7 platos diseñado por nuestro chef ejecutivo, maridaje de vinos incluido. Reserva con 24h de anticipación."
+                },
+                // Traducciones para el index.html
+                pizza: {
+                    name: "Pizza Artesanal de Trufa",
+                    description: "Base de masa madre fermentada 48 horas, salsa de tomate San Marzano, mozzarella di bufala, trufa negra, rúcula fresca y aceite de oliva extra virgen."
+                },
+                grilled: {
+                    name: "Salmón a la Parrilla",
+                    description: "Filete de salmón atlántico a la parrilla, acompañado de quinoa tricolor, espárragos verdes y salsa de limón con eneldo fresco."
+                },
+                dessert: {
+                    name: "Tiramisú de la Casa",
+                    description: "Clásico postre italiano preparado con café espresso, mascarpone artesanal, bizcochos savoiardi y cacao en polvo importado de Bélgica."
+                },
+                salad: {
+                    name: "Ensalada Mediterránea",
+                    description: "Mix de lechugas orgánicas, tomates cherry, aceitunas kalamata, queso feta, pepino, cebolla morada y vinagreta de hierbas mediterráneas."
                 }
             }
         },
@@ -297,6 +314,103 @@ const translations = {
                 main: {
                     title: "Momentos Especiales",
                     description: "Descubre la atmósfera única de nuestro restaurante a través de estas imágenes que capturan la esencia de la experiencia gastronómica que ofrecemos a nuestros comensales."
+                },
+                filters: {
+                    all: "Todas las Fotos",
+                    ambiente: "Ambiente",
+                    platos: "Nuestros Platos",
+                    eventos: "Eventos",
+                    chef: "En la Cocina"
+                },
+                categories: {
+                    ambiente: {
+                        title: "Ambiente del Restaurante",
+                        description: "Espacios elegantes y acogedores"
+                    },
+                    platos: {
+                        title: "Creaciones Gastronómicas",
+                        description: "Nuestras especialidades culinarias"
+                    },
+                    eventos: {
+                        title: "Eventos Especiales",
+                        description: "Celebraciones y momentos únicos"
+                    },
+                    chef: {
+                        title: "En la Cocina",
+                        description: "El arte culinario en acción"
+                    }
+                },
+                items: {
+                    salon_principal: {
+                        title: "Salón Principal",
+                        description: "Ambiente elegante con iluminación cálida"
+                    },
+                    area_vip: {
+                        title: "Área VIP",
+                        description: "Espacio exclusivo para ocasiones especiales"
+                    },
+                    terraza: {
+                        title: "Terraza Exterior",
+                        description: "Comedor al aire libre con vista panorámica"
+                    },
+                    bar_area: {
+                        title: "Área del Bar",
+                        description: "Barra de cócteles con ambiente sofisticado"
+                    },
+                    especialidad_chef: {
+                        title: "Especialidad del Chef",
+                        description: "Salmón a la parrilla con quinoa tricolor"
+                    },
+                    pasta_artesanal: {
+                        title: "Pasta Artesanal",
+                        description: "Preparada fresca diariamente"
+                    },
+                    postre_signature: {
+                        title: "Postre Signature",
+                        description: "Tiramisú clásico con toque especial"
+                    },
+                    plato_gourmet: {
+                        title: "Plato Gourmet",
+                        description: "Presentación artística de alta cocina"
+                    },
+                    celebracion_familiar: {
+                        title: "Celebración Familiar",
+                        description: "Momentos especiales en familia"
+                    },
+                    evento_corporativo: {
+                        title: "Evento Corporativo",
+                        description: "Reuniones de negocios en ambiente elegante"
+                    },
+                    cena_romantica: {
+                        title: "Cena Romántica",
+                        description: "Ambiente íntimo para parejas"
+                    },
+                    chef_preparando: {
+                        title: "Chef en Acción",
+                        description: "Maestría culinaria en cada preparación"
+                    },
+                    cocina_abierta: {
+                        title: "Cocina Abierta",
+                        description: "Transparencia en nuestros procesos"
+                    }
+                },
+                video: {
+                    title: "Conoce Nuestro Restaurante",
+                    tour: {
+                        title: "Tour Virtual",
+                        description: "Recorre nuestras instalaciones"
+                    },
+                    chef: {
+                        title: "Chef en Acción",
+                        description: "El arte culinario en movimiento"
+                    }
+                },
+                ui: {
+                    viewCollection: "Ver Colección",
+                    photos: "fotos",
+                    closeSlider: "Cerrar",
+                    previousImage: "Imagen Anterior",
+                    nextImage: "Siguiente Imagen"
                 }
             },
             reservation: {
@@ -322,7 +436,35 @@ const translations = {
                         name: "Ingresa tu nombre completo",
                         email: "tu@email.com",
                         phone: "+52 55 1234-5678",
+                        date: "Selecciona una fecha",
+                        time: "Selecciona una hora",
                         message: "Ocasión especial, alergias, preferencias..."
+                    },
+                    validation: {
+                        required: "Este campo es obligatorio",
+                        invalidEmail: "Ingresa un email válido",
+                        invalidPhone: "Ingresa un teléfono válido",
+                        pastDate: "La fecha no puede ser anterior a hoy",
+                        invalidTime: "Selecciona una hora válida",
+                        success: "¡Reserva enviada exitosamente!",
+                        error: "Error al enviar la reserva. Inténtalo de nuevo."
+                    },
+                    timeSlots: {
+                        lunch: "Almuerzo",
+                        dinner: "Cena",
+                        available: "Disponible",
+                        unavailable: "No disponible",
+                        recommended: "Recomendado"
+                    },
+                    guestOptions: {
+                        "1": "1 persona",
+                        "2": "2 personas",
+                        "3": "3 personas",
+                        "4": "4 personas",
+                        "5": "5 personas",
+                        "6": "6 personas",
+                        "7": "7 personas",
+                        "8": "8+ personas (contactar)"
                     }
                 }
             },
@@ -547,6 +689,23 @@ const translations = {
                 tasting: {
                     name: "7-Course Tasting Menu",
                     description: "Gastronomic journey of 7 dishes designed by our executive chef, wine pairing included. Reserve 24h in advance."
+                },
+                // Traducciones para el index.html
+                pizza: {
+                    name: "Artisanal Truffle Pizza",
+                    description: "Sourdough base fermented for 48 hours, San Marzano tomato sauce, buffalo mozzarella, black truffle, fresh arugula and extra virgin olive oil."
+                },
+                grilled: {
+                    name: "Grilled Salmon",
+                    description: "Atlantic salmon fillet grilled to perfection, served with tricolor quinoa, green asparagus and fresh dill lemon sauce."
+                },
+                dessert: {
+                    name: "House Tiramisu",
+                    description: "Classic Italian dessert prepared with espresso coffee, artisanal mascarpone, savoiardi biscuits and Belgian imported cocoa powder."
+                },
+                salad: {
+                    name: "Mediterranean Salad",
+                    description: "Mix of organic lettuce, cherry tomatoes, kalamata olives, feta cheese, cucumber, red onion and Mediterranean herb vinaigrette."
                 }
             }
         },
@@ -737,6 +896,103 @@ const translations = {
                 main: {
                     title: "Special Moments",
                     description: "Discover the unique atmosphere of our restaurant through these images that capture the essence of the gastronomic experience we offer to our diners."
+                },
+                filters: {
+                    all: "All Photos",
+                    ambiente: "Atmosphere",
+                    platos: "Our Dishes",
+                    eventos: "Events",
+                    chef: "In the Kitchen"
+                },
+                categories: {
+                    ambiente: {
+                        title: "Restaurant Atmosphere",
+                        description: "Elegant and welcoming spaces"
+                    },
+                    platos: {
+                        title: "Gastronomic Creations",
+                        description: "Our culinary specialties"
+                    },
+                    eventos: {
+                        title: "Special Events",
+                        description: "Celebrations and unique moments"
+                    },
+                    chef: {
+                        title: "In the Kitchen",
+                        description: "Culinary art in action"
+                    }
+                },
+                items: {
+                    salon_principal: {
+                        title: "Main Dining Room",
+                        description: "Elegant atmosphere with warm lighting"
+                    },
+                    area_vip: {
+                        title: "VIP Area",
+                        description: "Exclusive space for special occasions"
+                    },
+                    terraza: {
+                        title: "Outdoor Terrace",
+                        description: "Al fresco dining with panoramic view"
+                    },
+                    bar_area: {
+                        title: "Bar Area",
+                        description: "Cocktail bar with sophisticated ambiance"
+                    },
+                    especialidad_chef: {
+                        title: "Chef's Specialty",
+                        description: "Grilled salmon with tricolor quinoa"
+                    },
+                    pasta_artesanal: {
+                        title: "Artisanal Pasta",
+                        description: "Freshly prepared daily"
+                    },
+                    postre_signature: {
+                        title: "Signature Dessert",
+                        description: "Classic tiramisu with special touch"
+                    },
+                    plato_gourmet: {
+                        title: "Gourmet Dish",
+                        description: "Artistic presentation of haute cuisine"
+                    },
+                    celebracion_familiar: {
+                        title: "Family Celebration",
+                        description: "Special family moments"
+                    },
+                    evento_corporativo: {
+                        title: "Corporate Event",
+                        description: "Business meetings in elegant setting"
+                    },
+                    cena_romantica: {
+                        title: "Romantic Dinner",
+                        description: "Intimate atmosphere for couples"
+                    },
+                    chef_preparando: {
+                        title: "Chef in Action",
+                        description: "Culinary mastery in every preparation"
+                    },
+                    cocina_abierta: {
+                        title: "Open Kitchen",
+                        description: "Transparency in our processes"
+                    }
+                },
+                video: {
+                    title: "Discover Our Restaurant",
+                    tour: {
+                        title: "Virtual Tour",
+                        description: "Explore our facilities"
+                    },
+                    chef: {
+                        title: "Chef in Action",
+                        description: "Culinary art in motion"
+                    }
+                },
+                ui: {
+                    viewCollection: "View Collection",
+                    photos: "photos",
+                    closeSlider: "Close",
+                    previousImage: "Previous Image",
+                    nextImage: "Next Image"
                 }
             },
             reservation: {
@@ -762,7 +1018,35 @@ const translations = {
                         name: "Enter your full name",
                         email: "your@email.com",
                         phone: "+52 55 1234-5678",
+                        date: "Select a date",
+                        time: "Select a time",
                         message: "Special occasion, allergies, preferences..."
+                    },
+                    validation: {
+                        required: "This field is required",
+                        invalidEmail: "Enter a valid email",
+                        invalidPhone: "Enter a valid phone number",
+                        pastDate: "Date cannot be in the past",
+                        invalidTime: "Select a valid time",
+                        success: "Reservation sent successfully!",
+                        error: "Error sending reservation. Please try again."
+                    },
+                    timeSlots: {
+                        lunch: "Lunch",
+                        dinner: "Dinner",
+                        available: "Available",
+                        unavailable: "Unavailable",
+                        recommended: "Recommended"
+                    },
+                    guestOptions: {
+                        "1": "1 person",
+                        "2": "2 people",
+                        "3": "3 people",
+                        "4": "4 people",
+                        "5": "5 people",
+                        "6": "6 people",
+                        "7": "7 people",
+                        "8": "8+ people (contact us)"
                     }
                 }
             },

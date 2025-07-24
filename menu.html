@@ -3,11 +3,37 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Tasty &mdash; Free Website Template, Free HTML5 Template by freehtml5.co</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="freehtml5.co" />
+	<title>Menú Gourmet - Restaurante Tasty | Especialidades Culinarias y Precios</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Explora nuestro menú gourmet con especialidades únicas. Platos principales desde $18.50, postres artesanales y bebidas premium. Cocina internacional en CDMX." />
+	<meta name="keywords" content="menú restaurante, cocina gourmet, especialidades culinarias, platos principales, postres artesanales, bebidas premium, precios restaurante" />
+	<meta name="author" content="Restaurante Tasty" />
+
+	<!-- SEO Avanzado -->
+	<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+	<meta name="googlebot" content="index, follow">
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Menú Gourmet - Restaurante Tasty | Especialidades Culinarias">
+	<meta property="og:description" content="Explora nuestro menú gourmet con especialidades únicas. Platos principales desde $18.50, postres artesanales y bebidas premium.">
+	<meta property="og:url" content="https://restaurantetasty.com/menu.html">
+	<meta property="og:site_name" content="Restaurante Tasty">
+	<meta property="og:locale" content="es_MX">
+	<meta property="og:image" content="https://restaurantetasty.com/images/gallery_8.jpeg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:image:alt" content="Menú Gourmet - Especialidad del Chef">
+
+	<!-- Twitter Cards -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@restaurantetasty">
+	<meta name="twitter:title" content="Menú Gourmet - Restaurante Tasty">
+	<meta name="twitter:description" content="Explora nuestro menú gourmet con especialidades únicas y precios accesibles.">
+	<meta name="twitter:image" content="https://restaurantetasty.com/images/gallery_8.jpeg">
+
+	<!-- Canonical URL -->
+	<link rel="canonical" href="https://restaurantetasty.com/menu.html">
 
 	<!-- 
 	//////////////////////////////////////////////////////
@@ -36,11 +62,41 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,600i,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+
+	<!-- PWA Meta Tags -->
+	<meta name="theme-color" content="#ea272d">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-title" content="Restaurante Tasty">
+	<meta name="msapplication-TileColor" content="#ea272d">
+	<meta name="msapplication-TileImage" content="/images/icons/icon-144x144.png">
+	<meta name="mobile-web-app-capable" content="yes">
+
+	<!-- PWA Manifest -->
+	<link rel="manifest" href="/manifest.json">
+
+	<!-- PWA Icons -->
+	<link rel="apple-touch-icon" sizes="72x72" href="/images/icons/icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="96x96" href="/images/icons/icon-96x96.png">
+	<link rel="apple-touch-icon" sizes="128x128" href="/images/icons/icon-128x128.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/images/icons/icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/images/icons/icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="192x192" href="/images/icons/icon-192x192.png">
+	<link rel="apple-touch-icon" sizes="384x384" href="/images/icons/icon-384x384.png">
+	<link rel="apple-touch-icon" sizes="512x512" href="/images/icons/icon-512x512.png">
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+	<link rel="shortcut icon" href="/images/icons/favicon.ico">
 	
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
 	<link rel="stylesheet" href="css/icomoon.css">
+
+	<!-- Font Awesome para WhatsApp -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<!-- Flexslider  -->
@@ -48,6 +104,9 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
+
+	<!-- WhatsApp Float CSS -->
+	<link rel="stylesheet" href="css/whatsapp-float.css">
 
 	<!-- Estilos del Menú Híbrido -->
 	<style>
@@ -463,6 +522,37 @@
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
+
+	<!-- Schema.org para Menú -->
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Menu",
+		"name": "Menú Restaurante Tasty",
+		"description": "Menú completo con especialidades gourmet y cocina internacional",
+		"hasMenuSection": [
+			{
+				"@type": "MenuSection",
+				"name": "Platos Principales",
+				"description": "Especialidades gourmet preparadas con ingredientes frescos",
+				"hasMenuItem": [
+					{
+						"@type": "MenuItem",
+						"name": "Salmón a la Parrilla",
+						"description": "Salmón atlántico con quinoa tricolor y reducción de vino blanco",
+						"offers": {
+							"@type": "Offer",
+							"price": "28.50",
+							"priceCurrency": "USD"
+						},
+						"image": "https://restaurantetasty.com/images/gallery_8.jpeg"
+					}
+				]
+			}
+		]
+	}
+	</script>
+
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
@@ -1027,10 +1117,10 @@
 				<div class="col-md-4 col-md-push-1 fh5co-widget">
 					<h4 data-translate="footer.contact.title">Contáctanos</h4>
 					<ul class="fh5co-footer-links">
-						<li data-translate="footer.contact.address">Av. Reforma 1847, Col. Lomas de Chapultepec, <br> CDMX 11000</li>
-						<li><a href="tel://525555550123" data-translate="footer.contact.phone">+52 55 5555-0123</a></li>
-						<li><a href="mailto:reservas@restaurantetasty.com" data-translate="footer.contact.email">reservas@restaurantetasty.com</a></li>
-						<li><a href="#" onclick="return false;">Horarios: Lun-Dom 12:00-23:00</a></li>
+						<li data-contact="address" data-translate="footer.contact.address">Av. Reforma 1847, Col. Lomas de Chapultepec, <br> CDMX 11000</li>
+						<li><a href="tel://525555550123" data-contact="phone" data-translate="footer.contact.phone">+52 55 5555-0123</a></li>
+						<li><a href="mailto:reservas@restaurantetasty.com" data-contact="email" data-translate="footer.contact.email">reservas@restaurantetasty.com</a></li>
+						<li><a href="#" onclick="return false;" data-contact="hours">Horarios: Lun-Dom 12:00-23:00</a></li>
 					</ul>
 				</div>
 
@@ -1363,6 +1453,18 @@
 			updatePrices();
 		});
 	</script>
+
+	<!-- SEO Manager Avanzado -->
+	<script src="js/seo-manager.js"></script>
+
+	<!-- PWA Manager -->
+	<script src="js/pwa-manager.js"></script>
+
+	<!-- WhatsApp Integration -->
+	<script src="js/whatsapp-integration.js"></script>
+
+	<!-- Sistema de Datos Centralizados -->
+	<script src="js/data-system-init.js"></script>
 
 	</body>
 </html>
