@@ -2,8 +2,8 @@
   "name": "Restaurante Tasty - La Mejor Experiencia Gastronómica",
   "short_name": "Tasty",
   "description": "Descubre la mejor cocina gourmet en CDMX. Reserva tu mesa, explora nuestro menú y vive una experiencia gastronómica única.",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
   "theme_color": "#ea272d",
@@ -36,64 +36,32 @@
   ],
   "icons": [
     {
-      "src": "/images/icons/icon-72x72.png",
-      "sizes": "72x72",
-      "type": "image/png",
-      "purpose": "maskable any"
+      "src": "images/icons/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
     },
     {
-      "src": "/images/icons/icon-96x96.png",
-      "sizes": "96x96", 
-      "type": "image/png",
-      "purpose": "maskable any"
+      "src": "images/icons/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
     },
     {
-      "src": "/images/icons/icon-128x128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/images/icons/icon-144x144.png",
+      "src": "images/icons/icon-144x144.png",
       "sizes": "144x144",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any"
     },
     {
-      "src": "/images/icons/icon-152x152.png",
-      "sizes": "152x152",
-      "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/images/icons/icon-192x192.png",
+      "src": "images/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "any maskable"
     },
     {
-      "src": "/images/icons/icon-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/images/icons/icon-512x512.png",
+      "src": "images/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/images/icons/icon-maskable-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/images/icons/icon-maskable-512x512.png",
-      "sizes": "512x512", 
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
@@ -101,24 +69,24 @@
       "name": "Hacer Reserva",
       "short_name": "Reservar",
       "description": "Reserva tu mesa de forma rápida",
-      "url": "/reservation.html",
+      "url": "reservation.html",
       "icons": [
         {
-          "src": "/images/icons/shortcut-reservation.png",
-          "sizes": "96x96",
+          "src": "images/icons/icon-144x144.png",
+          "sizes": "144x144",
           "type": "image/png"
         }
       ]
     },
     {
       "name": "Ver Menú",
-      "short_name": "Menú", 
+      "short_name": "Menú",
       "description": "Explora nuestro menú gourmet",
-      "url": "/menu.html",
+      "url": "menu.html",
       "icons": [
         {
-          "src": "/images/icons/shortcut-menu.png",
-          "sizes": "96x96",
+          "src": "images/icons/icon-144x144.png",
+          "sizes": "144x144",
           "type": "image/png"
         }
       ]
@@ -126,12 +94,12 @@
     {
       "name": "Galería",
       "short_name": "Fotos",
-      "description": "Descubre nuestro ambiente elegante", 
-      "url": "/gallery.html",
+      "description": "Descubre nuestro ambiente elegante",
+      "url": "gallery.html",
       "icons": [
         {
-          "src": "/images/icons/shortcut-gallery.png",
-          "sizes": "96x96",
+          "src": "images/icons/icon-144x144.png",
+          "sizes": "144x144",
           "type": "image/png"
         }
       ]
@@ -140,11 +108,11 @@
       "name": "Contacto",
       "short_name": "Llamar",
       "description": "Información de contacto y ubicación",
-      "url": "/contact.html", 
+      "url": "contact.html",
       "icons": [
         {
-          "src": "/images/icons/shortcut-contact.png",
-          "sizes": "96x96",
+          "src": "images/icons/icon-144x144.png",
+          "sizes": "144x144",
           "type": "image/png"
         }
       ]

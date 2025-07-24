@@ -9,45 +9,45 @@ const DYNAMIC_CACHE = 'dynamic-v1.2';
 
 // Recursos críticos que se cachean inmediatamente
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/menu.html',
-  '/gallery.html', 
-  '/reservation.html',
-  '/contact.html',
-  '/manifest.json',
-  
+  './',
+  './index.html',
+  './menu.html',
+  './gallery.html',
+  './reservation.html',
+  './contact.html',
+  './manifest.json',
+
   // CSS
-  '/css/animate.css',
-  '/css/bootstrap.css',
-  '/css/flexslider.css',
-  '/css/icomoon.css',
-  '/css/style.css',
-  '/css/reservation-premium.css',
-  '/css/gallery-premium.css',
-  
+  './css/animate.css',
+  './css/bootstrap.css',
+  './css/flexslider.css',
+  './css/icomoon.css',
+  './css/style.css',
+  './css/reservation-premium.css',
+  './css/gallery-premium.css',
+
   // JavaScript
-  '/js/jquery.min.js',
-  '/js/bootstrap.min.js',
-  '/js/jquery.waypoints.min.js',
-  '/js/jquery.stellar.min.js',
-  '/js/jquery.flexslider-min.js',
-  '/js/main.js',
-  '/js/translations.js',
-  '/js/language-manager.js',
-  '/js/seo-manager.js',
-  '/js/reservation-system.js',
-  '/js/gallery-premium.js',
-  
+  './js/jquery.min.js',
+  './js/bootstrap.min.js',
+  './js/jquery.waypoints.min.js',
+  './js/jquery.stellar.min.js',
+  './js/jquery.flexslider-min.js',
+  './js/main.js',
+  './js/translations.js',
+  './js/language-manager.js',
+  './js/seo-manager.js',
+  './js/reservation-system.js',
+  './js/gallery-premium.js',
+
   // Imágenes críticas
-  '/images/gallery_1.jpeg',
-  '/images/gallery_2.jpeg',
-  '/images/gallery_8.jpeg',
-  '/images/hero_1.jpeg',
-  
+  './images/gallery_1.jpeg',
+  './images/gallery_2.jpeg',
+  './images/gallery_8.jpeg',
+  './images/hero_1.jpeg',
+
   // Iconos PWA
-  '/images/icons/icon-192x192.png',
-  '/images/icons/icon-512x512.png',
+  './images/icons/icon-192x192.png',
+  './images/icons/icon-512x512.png',
   
   // Fuentes
   'https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,600i,700',
@@ -56,12 +56,12 @@ const STATIC_ASSETS = [
 
 // Recursos que se cachean dinámicamente
 const DYNAMIC_ASSETS = [
-  '/images/gallery_3.jpeg',
-  '/images/gallery_4.jpeg', 
-  '/images/gallery_5.jpeg',
-  '/images/gallery_6.jpeg',
-  '/images/gallery_7.jpeg',
-  '/images/gallery_9.jpeg'
+  './images/gallery_3.jpeg',
+  './images/gallery_4.jpeg',
+  './images/gallery_5.jpeg',
+  './images/gallery_6.jpeg',
+  './images/gallery_7.jpeg',
+  './images/gallery_9.jpeg'
 ];
 
 // Instalar Service Worker

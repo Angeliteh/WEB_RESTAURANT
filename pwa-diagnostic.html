@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 PWA Diagnostic - Restaurante Tasty</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background: #8B4513;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #A0522D; }
+        .file-list {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .install-prompt {
+            background: #e7f3ff;
+            border: 2px solid #0066cc;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .install-button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 PWA Diagnostic Tool</h1>
+        <p>Esta herramienta verifica que todos los componentes del PWA estén funcionando correctamente.</p>
+        
+        <button onclick="runFullDiagnostic()">🚀 Ejecutar Diagnóstico Completo</button>
+        <button onclick="testInstallability()">📱 Test Instalabilidad</button>
+        <button onclick="clearCache()">🧹 Limpiar Caché</button>
+        
+        <div id="install-section" class="install-prompt" style="display: none;">
+            <h3>📱 ¡App Lista para Instalar!</h3>
+            <p>Tu PWA está lista para ser instalada como aplicación nativa.</p>
+            <button id="install-button" class="install-button">📲 Instalar App</button>
+        </div>
+        
+        <div class="test-section">
+            <h3>📋 Resultados del Diagnóstico</h3>
+            <div id="diagnostic-results"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📱 Service Worker Status</h3>
+            <div id="sw-status"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📄 Manifest Status</h3>
+            <div id="manifest-status"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🖼️ Icons Status</h3>
+            <div id="icons-status"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🌐 HTTPS Status</h3>
+            <div id="https-status"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📊 PWA Score</h3>
+            <div id="pwa-score"></div>
+        </div>
+    </div>
+    
+    <script>
+        let deferredPrompt;
+        let installButton;
+        
+        // Escuchar evento de instalación
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('💡 beforeinstallprompt event fired');
+            e.preventDefault();
+            deferredPrompt = e;
+            showInstallPrompt();
+        });
+        
+        // Escuchar instalación completada
+        window.addEventListener('appinstalled', (e) => {
+            console.log('✅ PWA installed successfully');
+            updateStatus('install-section', '✅ App instalada correctamente!', 'success');
+            deferredPrompt = null;
+        });
+        
+        function showInstallPrompt() {
+            const installSection = document.getElementById('install-section');
+            installSection.style.display = 'block';
+            
+            const installBtn = document.getElementById('install-button');
+            installBtn.addEventListener('click', installApp);
+        }
+        
+        async function installApp() {
+            if (!deferredPrompt) {
+                updateStatus('install-section', '❌ No se puede instalar en este momento', 'error');
+                return;
+            }
+            
+            const result = await deferredPrompt.prompt();
+            console.log('👤 User response to install prompt:', result);
+            
+            if (result.outcome === 'accepted') {
+                updateStatus('install-section', '✅ Instalación iniciada...', 'success');
+            } else {
+                updateStatus('install-section', '❌ Instalación cancelada por el usuario', 'warning');
+            }
+            
+            deferredPrompt = null;
+        }
+        
+        function updateStatus(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+        
+        async function runFullDiagnostic() {
+            console.log('🔍 Starting PWA diagnostic...');
+            
+            updateStatus('diagnostic-results', '🔄 Ejecutando diagnóstico...', 'info');
+            
+            // Test Service Worker
+            await testServiceWorker();
+            
+            // Test Manifest
+            await testManifest();
+            
+            // Test Icons
+            await testIcons();
+            
+            // Test HTTPS
+            testHTTPS();
+            
+            // Test Installability
+            await testInstallability();
+            
+            // Calculate PWA Score
+            calculatePWAScore();
+            
+            updateStatus('diagnostic-results', '✅ Diagnóstico completado', 'success');
+        }
+        
+        async function testServiceWorker() {
+            try {
+                if ('serviceWorker' in navigator) {
+                    const registration = await navigator.serviceWorker.getRegistration();
+                    
+                    if (registration) {
+                        updateStatus('sw-status', 
+                            `✅ Service Worker registrado<br>
+                             📍 Scope: ${registration.scope}<br>
+                             🔄 Estado: ${registration.active ? 'Activo' : 'Inactivo'}`, 
+                            'success');
+                    } else {
+                        updateStatus('sw-status', '❌ Service Worker no registrado', 'error');
+                    }
+                } else {
+                    updateStatus('sw-status', '❌ Service Worker no soportado', 'error');
+                }
+            } catch (error) {
+                updateStatus('sw-status', `❌ Error: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testManifest() {
+            try {
+                const response = await fetch('/manifest.json');
+                
+                if (response.ok) {
+                    const manifest = await response.json();
+                    updateStatus('manifest-status', 
+                        `✅ Manifest cargado correctamente<br>
+                         📱 Nombre: ${manifest.name}<br>
+                         🎨 Tema: ${manifest.theme_color}<br>
+                         📋 Iconos: ${manifest.icons.length}`, 
+                        'success');
+                } else {
+                    updateStatus('manifest-status', `❌ Error ${response.status}: ${response.statusText}`, 'error');
+                }
+            } catch (error) {
+                updateStatus('manifest-status', `❌ Error cargando manifest: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testIcons() {
+            const iconPaths = [
+                'images/icons/favicon-16x16.png',
+                'images/icons/favicon-32x32.png', 
+                'images/icons/icon-144x144.png',
+                'images/icons/icon-192x192.png',
+                'images/icons/icon-512x512.png',
+                'images/icons/favicon.ico'
+            ];
+            
+            let results = [];
+            
+            for (const iconPath of iconPaths) {
+                try {
+                    const response = await fetch(iconPath);
+                    if (response.ok) {
+                        results.push(`✅ ${iconPath}`);
+                    } else {
+                        results.push(`❌ ${iconPath} (${response.status})`);
+                    }
+                } catch (error) {
+                    results.push(`❌ ${iconPath} (Error)`);
+                }
+            }
+            
+            updateStatus('icons-status', 
+                `<div class="file-list">${results.join('<br>')}</div>`, 
+                results.every(r => r.includes('✅')) ? 'success' : 'warning');
+        }
+        
+        function testHTTPS() {
+            const isHTTPS = location.protocol === 'https:';
+            const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+            
+            if (isHTTPS || isLocalhost) {
+                updateStatus('https-status', 
+                    `✅ Protocolo seguro: ${location.protocol}<br>
+                     🌐 Host: ${location.hostname}`, 
+                    'success');
+            } else {
+                updateStatus('https-status', 
+                    `❌ Se requiere HTTPS para PWA<br>
+                     🌐 Actual: ${location.protocol}`, 
+                    'error');
+            }
+        }
+        
+        async function testInstallability() {
+            const canInstall = 'serviceWorker' in navigator && 
+                              (location.protocol === 'https:' || location.hostname === 'localhost');
+            
+            if (canInstall) {
+                if (deferredPrompt) {
+                    updateStatus('diagnostic-results', '✅ PWA lista para instalar', 'success');
+                    showInstallPrompt();
+                } else {
+                    // Verificar si ya está instalada
+                    if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
+                        updateStatus('diagnostic-results', '✅ PWA ya está instalada', 'success');
+                    } else {
+                        updateStatus('diagnostic-results', '⚠️ PWA instalable pero prompt no disponible', 'warning');
+                    }
+                }
+            } else {
+                updateStatus('diagnostic-results', '❌ PWA no instalable en este entorno', 'error');
+            }
+        }
+        
+        function calculatePWAScore() {
+            let score = 0;
+            let maxScore = 5;
+            
+            // Service Worker
+            if (navigator.serviceWorker) score++;
+            
+            // HTTPS
+            if (location.protocol === 'https:' || location.hostname === 'localhost') score++;
+            
+            // Manifest
+            const manifestLink = document.querySelector('link[rel="manifest"]');
+            if (manifestLink) score++;
+            
+            // Responsive
+            const viewport = document.querySelector('meta[name="viewport"]');
+            if (viewport) score++;
+            
+            // Icons
+            const icons = document.querySelectorAll('link[rel*="icon"]');
+            if (icons.length > 0) score++;
+            
+            const percentage = Math.round((score / maxScore) * 100);
+            const color = percentage >= 80 ? 'success' : percentage >= 60 ? 'warning' : 'error';
+            
+            updateStatus('pwa-score', 
+                `📊 Puntuación PWA: ${score}/${maxScore} (${percentage}%)<br>
+                 ${percentage >= 80 ? '🏆 Excelente' : percentage >= 60 ? '⚠️ Bueno' : '❌ Necesita mejoras'}`, 
+                color);
+        }
+        
+        async function clearCache() {
+            try {
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    await Promise.all(
+                        cacheNames.map(cacheName => caches.delete(cacheName))
+                    );
+                    updateStatus('diagnostic-results', '✅ Caché limpiado correctamente', 'success');
+                } else {
+                    updateStatus('diagnostic-results', '❌ Cache API no disponible', 'error');
+                }
+            } catch (error) {
+                updateStatus('diagnostic-results', `❌ Error limpiando caché: ${error.message}`, 'error');
+            }
+        }
+        
+        // Ejecutar diagnóstico automáticamente
+        window.addEventListener('load', () => {
+            setTimeout(runFullDiagnostic, 1000);
+        });
+    </script>
+</body>
+</html>
