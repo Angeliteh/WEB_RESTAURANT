@@ -1,0 +1,1369 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Tasty &mdash; Free Website Template, Free HTML5 Template by freehtml5.co</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	<meta name="author" content="freehtml5.co" />
+
+	<!-- 
+	//////////////////////////////////////////////////////
+
+	FREE HTML5 TEMPLATE 
+	DESIGNED & DEVELOPED by FreeHTML5.co
+		
+	Website: 		http://freehtml5.co/
+	Email: 			info@freehtml5.co
+	Twitter: 		http://twitter.com/fh5co
+	Facebook: 		https://www.facebook.com/fh5co
+
+	//////////////////////////////////////////////////////
+	 -->
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,600i,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="css/flexslider.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Estilos del Menú Híbrido -->
+	<style>
+		/* Filtros del Menú */
+		.menu-filters {
+			text-align: center;
+			margin-bottom: 40px;
+		}
+		.menu-filters .filter-btn {
+			display: inline-block;
+			padding: 12px 24px;
+			margin: 5px 10px;
+			background: transparent;
+			border: 2px solid #ea272d;
+			color: rgba(255, 255, 255, 0.7);
+			border-radius: 30px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			font-weight: 600;
+			text-decoration: none;
+			font-family: "Cormorant Garamond", Georgia, serif;
+		}
+		.menu-filters .filter-btn:hover,
+		.menu-filters .filter-btn.active {
+			background: #ea272d;
+			color: white;
+			text-decoration: none;
+		}
+
+		/* Vista Desktop - Grid de 2 Columnas */
+		.menu-list-view {
+			display: block;
+		}
+		.menu-items-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 20px;
+			margin-bottom: 40px;
+		}
+		.menu-item-list {
+			display: flex;
+			flex-direction: column;
+			padding: 20px;
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 15px;
+			transition: all 0.3s ease;
+			background: rgba(255, 255, 255, 0.03);
+			height: 100%;
+		}
+		.menu-item-list:hover {
+			box-shadow: 0 8px 25px rgba(234, 39, 45, 0.2);
+			transform: translateY(-3px);
+			border-color: rgba(234, 39, 45, 0.3);
+		}
+		.menu-item-list img {
+			width: 100%;
+			height: 200px;
+			object-fit: cover;
+			border-radius: 10px;
+			margin-bottom: 15px;
+		}
+		.menu-item-content {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+		}
+		.menu-item-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			margin-bottom: 10px;
+		}
+		.menu-item-title {
+			font-size: 20px;
+			font-weight: 600;
+			color: rgba(255, 255, 255, 0.9);
+			margin: 0;
+			flex: 1;
+			line-height: 1.3;
+			font-family: "Cormorant Garamond", Georgia, serif;
+		}
+		.menu-item-price {
+			font-size: 24px;
+			font-weight: 700;
+			color: rgba(255, 255, 255, 0.9);
+			margin-left: 15px;
+			white-space: nowrap;
+		}
+		.menu-item-badges {
+			margin: 8px 0;
+		}
+		.menu-badge {
+			display: inline-block;
+			padding: 4px 8px;
+			margin-right: 8px;
+			border-radius: 15px;
+			font-size: 12px;
+			font-weight: 600;
+		}
+		.badge-bestseller { background: #ff6b6b; color: white; }
+		.badge-chef { background: #ffd93d; color: #333; }
+		.badge-new { background: #6c5ce7; color: white; }
+		.badge-healthy { background: #00b894; color: white; }
+		.badge-spicy { background: #e17055; color: white; }
+		.badge-vegetarian { background: #55a3ff; color: white; }
+
+		.menu-item-description {
+			color: rgba(255, 255, 255, 0.6);
+			line-height: 1.6;
+			margin-bottom: 15px;
+			font-family: "Cormorant Garamond", Georgia, serif;
+		}
+		.menu-item-actions {
+			display: flex;
+			gap: 10px;
+		}
+		.btn-add-cart {
+			background: #ea272d;
+			color: white;
+			border: none;
+			padding: 12px 24px;
+			border-radius: 25px;
+			cursor: pointer;
+			font-weight: 600;
+			transition: all 0.3s ease;
+			font-family: "Cormorant Garamond", Georgia, serif;
+			font-size: 16px;
+		}
+		.btn-add-cart:hover {
+			background: #d41e24;
+			transform: translateY(-2px);
+			box-shadow: 0 4px 15px rgba(234, 39, 45, 0.3);
+		}
+
+		/* Vista Mobile - Grid */
+		.menu-grid-view {
+			display: none;
+		}
+		.menu-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 20px;
+		}
+		.menu-item-card {
+			background: rgba(255, 255, 255, 0.03);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 15px;
+			overflow: hidden;
+			box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+			transition: all 0.3s ease;
+		}
+		.menu-item-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 25px rgba(234, 39, 45, 0.2);
+			border-color: rgba(234, 39, 45, 0.3);
+		}
+		.menu-item-card img {
+			width: 100%;
+			height: 200px;
+			object-fit: cover;
+		}
+		.menu-card-content {
+			padding: 20px;
+		}
+		.menu-card-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			margin-bottom: 10px;
+		}
+		.menu-card-title {
+			font-size: 18px;
+			font-weight: 600;
+			color: rgba(255, 255, 255, 0.9);
+			margin: 0;
+			flex: 1;
+			font-family: "Cormorant Garamond", Georgia, serif;
+		}
+		.menu-card-price {
+			font-size: 20px;
+			font-weight: 700;
+			color: rgba(255, 255, 255, 0.9);
+		}
+		.menu-card-description {
+			color: rgba(255, 255, 255, 0.6);
+			font-size: 14px;
+			line-height: 1.5;
+			margin-bottom: 15px;
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			font-family: "Cormorant Garamond", Georgia, serif;
+		}
+
+		/* Carrito Flotante */
+		.floating-cart {
+			position: fixed;
+			bottom: 30px;
+			right: 30px;
+			background: #ea272d;
+			color: white;
+			border: 2px solid rgba(255, 255, 255, 0.2);
+			border-radius: 50px;
+			padding: 15px 20px;
+			font-size: 16px;
+			font-weight: 700;
+			cursor: pointer;
+			box-shadow: 0 6px 25px rgba(234, 39, 45, 0.6);
+			transition: all 0.3s ease;
+			z-index: 1000;
+			display: none;
+			font-family: "Cormorant Garamond", Georgia, serif;
+			animation: pulse 2s infinite;
+		}
+		.floating-cart:hover {
+			background: #d41e24;
+			transform: translateY(-3px) scale(1.05);
+			box-shadow: 0 8px 30px rgba(234, 39, 45, 0.8);
+			border-color: rgba(255, 255, 255, 0.4);
+		}
+		.floating-cart.show {
+			display: block;
+		}
+
+		@keyframes pulse {
+			0% { box-shadow: 0 6px 25px rgba(234, 39, 45, 0.6); }
+			50% { box-shadow: 0 6px 25px rgba(234, 39, 45, 0.8); }
+			100% { box-shadow: 0 6px 25px rgba(234, 39, 45, 0.6); }
+		}
+		.cart-count {
+			background: #ff6b6b;
+			color: white;
+			border-radius: 50%;
+			padding: 2px 8px;
+			font-size: 12px;
+			margin-left: 8px;
+			min-width: 20px;
+			text-align: center;
+		}
+
+		/* Panel del Carrito */
+		.cart-panel {
+			position: fixed;
+			top: 0;
+			right: -400px;
+			width: 400px;
+			height: 100vh;
+			background: #000 url(images/broken_noise.png);
+			border-left: 2px solid rgba(234, 39, 45, 0.3);
+			box-shadow: -5px 0 20px rgba(0,0,0,0.8);
+			transition: right 0.3s ease;
+			z-index: 1001;
+			display: flex;
+			flex-direction: column;
+		}
+		.cart-panel.open {
+			right: 0;
+		}
+		.cart-header {
+			padding: 20px;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.cart-header h3 {
+			margin: 0;
+			color: rgba(255, 255, 255, 0.9);
+			font-family: "Cormorant Garamond", Georgia, serif;
+			font-size: 24px;
+		}
+		.cart-close {
+			background: none;
+			border: none;
+			font-size: 28px;
+			cursor: pointer;
+			color: rgba(255, 255, 255, 0.7);
+			transition: color 0.3s ease;
+		}
+		.cart-close:hover {
+			color: #ea272d;
+		}
+		.cart-items {
+			flex: 1;
+			overflow-y: auto;
+			padding: 20px;
+		}
+		.cart-item {
+			display: flex;
+			align-items: center;
+			padding: 15px 0;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		}
+		.cart-item img {
+			width: 60px;
+			height: 60px;
+			object-fit: cover;
+			border-radius: 8px;
+			margin-right: 15px;
+			border: 1px solid rgba(255, 255, 255, 0.1);
+		}
+		.cart-item-info {
+			flex: 1;
+		}
+		.cart-item-name {
+			font-weight: 600;
+			color: rgba(255, 255, 255, 0.9);
+			margin-bottom: 5px;
+			font-family: "Cormorant Garamond", Georgia, serif;
+		}
+		.cart-item-price {
+			color: rgba(255, 255, 255, 0.8);
+			font-weight: 600;
+		}
+		.cart-item-remove {
+			background: #ea272d;
+			color: white;
+			border: none;
+			border-radius: 50%;
+			width: 30px;
+			height: 30px;
+			cursor: pointer;
+			font-size: 16px;
+			transition: all 0.3s ease;
+		}
+		.cart-item-remove:hover {
+			background: #d41e24;
+			transform: scale(1.1);
+		}
+		.cart-footer {
+			padding: 20px;
+			border-top: 1px solid rgba(255, 255, 255, 0.1);
+			background: rgba(255, 255, 255, 0.03);
+		}
+		.cart-total {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			font-size: 18px;
+			font-weight: 700;
+			margin-bottom: 15px;
+			color: rgba(255, 255, 255, 0.9);
+			font-family: "Cormorant Garamond", Georgia, serif;
+		}
+		.cart-total-price {
+			color: rgba(255, 255, 255, 0.9);
+		}
+		.cart-clear {
+			width: 100%;
+			background: #ea272d;
+			color: white;
+			border: none;
+			padding: 12px;
+			border-radius: 8px;
+			font-weight: 600;
+			cursor: pointer;
+			font-family: "Cormorant Garamond", Georgia, serif;
+			transition: all 0.3s ease;
+		}
+		.cart-clear:hover {
+			background: #d41e24;
+			transform: translateY(-1px);
+		}
+
+		/* Overlay */
+		.cart-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background: rgba(0,0,0,0.8);
+			z-index: 1000;
+			display: none;
+			backdrop-filter: blur(2px);
+		}
+		.cart-overlay.show {
+			display: block;
+		}
+
+		/* Responsive */
+		@media (max-width: 768px) {
+			.menu-list-view { display: none; }
+			.menu-grid-view { display: block; }
+			.menu-filters .filter-btn {
+				padding: 8px 16px;
+				margin: 3px 5px;
+				font-size: 14px;
+			}
+			.menu-items-grid {
+				grid-template-columns: 1fr;
+			}
+			.cart-panel {
+				width: 100vw;
+				right: -100vw;
+			}
+			.floating-cart {
+				bottom: 20px;
+				right: 20px;
+				padding: 12px 16px;
+			}
+		}
+
+		/* Categorías ocultas por defecto */
+		.menu-category {
+			display: none;
+		}
+		.menu-category.active {
+			display: block;
+		}
+	</style>
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+		
+	<div class="fh5co-loader"></div>
+	
+	<div id="page">
+	<nav class="fh5co-nav" role="navigation">
+		<!-- <div class="top-menu"> -->
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 text-center logo-wrap">
+						<div id="fh5co-logo"><a href="index.html">Tasty<span>.</span></a></div>
+					</div>
+					<div class="col-xs-12 text-center menu-1 menu-wrap">
+						<ul>
+							<li><a href="index.html" data-translate="nav.home">Home</a></li>
+							<li class="active"><a href="menu.html" data-translate="nav.menu">Menu</a></li>
+							<li class="has-dropdown">
+								<a href="gallery.html" data-translate="nav.gallery">Gallery</a>
+								<ul class="dropdown">
+									<li><a href="#" data-translate="nav.events">Events</a></li>
+									<li><a href="#" data-translate="nav.food">Food</a></li>
+									<li><a href="#" data-translate="nav.coffees">Coffees</a></li>
+								</ul>
+							</li>
+							<li><a href="reservation.html" data-translate="nav.reservation">Reservation</a></li>
+							<li><a href="about.html" data-translate="nav.about">About</a></li>
+							<li><a href="contact.html" data-translate="nav.contact">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		<!-- </div> -->
+	</nav>
+
+	<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image: url(images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="display-t js-fullheight">
+						<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+							<h1 data-translate="pages.menu.hero.title">Descubre <em>Nuestro</em> Menú</h1>
+							<h2><span data-translate="pages.menu.hero.subtitle">Bienvenidos a</span> <strong>Tasty</strong></h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div id="fh5co-featured-menu" class="fh5co-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 fh5co-heading animate-box">
+					<h2 data-translate="pages.menu.main.title">Nuestro Delicioso Menú</h2>
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2 text-center">
+							<p data-translate="pages.menu.main.description">Explora nuestra cuidadosa selección de platos gourmet, preparados con ingredientes frescos y técnicas culinarias tradicionales. Cada creación refleja nuestra pasión por la excelencia gastronómica.</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Filtros del Menú -->
+				<div class="col-md-12">
+					<div class="menu-filters animate-box">
+						<a href="#" class="filter-btn active" data-filter="all" data-translate="menu.filters.all">Todos</a>
+						<a href="#" class="filter-btn" data-filter="entradas" data-translate="menu.filters.appetizers">🥗 Entradas</a>
+						<a href="#" class="filter-btn" data-filter="principales" data-translate="menu.filters.mains">🍖 Platos Fuertes</a>
+						<a href="#" class="filter-btn" data-filter="postres" data-translate="menu.filters.desserts">🍰 Postres</a>
+						<a href="#" class="filter-btn" data-filter="bebidas" data-translate="menu.filters.drinks">🍷 Bebidas</a>
+						<a href="#" class="filter-btn" data-filter="especiales" data-translate="menu.filters.specials">⭐ Especiales</a>
+					</div>
+				</div>
+
+				<!-- Vista Desktop - Lista -->
+				<div class="col-md-12 menu-list-view">
+
+					<!-- ENTRADAS -->
+					<div class="menu-category active" data-category="entradas">
+						<h3 style="color: #ea272d; margin-bottom: 30px; font-size: 28px; font-family: 'Cormorant Garamond', Georgia, serif;">🥗 <span data-translate="menu.categories.appetizers">Entradas</span></h3>
+
+						<div class="menu-items-grid">
+							<div class="menu-item-list animate-box" data-item="carpaccio" data-price="24.95" data-image="images/gallery_1.jpeg">
+								<img src="images/gallery_1.jpeg" alt="Carpaccio de Res Premium">
+								<div class="menu-item-content">
+									<div class="menu-item-header">
+										<h4 class="menu-item-title" data-translate="menu.items.carpaccio.name">Carpaccio de Res Premium</h4>
+										<span class="menu-item-price" data-price-usd="24.95">$24<sup>.95</sup></span>
+									</div>
+									<div class="menu-item-badges">
+										<span class="menu-badge badge-bestseller" data-translate="menu.badges.bestseller">⭐ Más Vendido</span>
+										<span class="menu-badge badge-chef" data-translate="menu.badges.chef">👨‍🍳 Recomendación del Chef</span>
+									</div>
+									<p class="menu-item-description" data-translate="menu.items.carpaccio.description">Láminas de res angus madurada, rúcula silvestre, parmesano reggiano 24 meses, aceite de oliva extra virgen y reducción balsámica.</p>
+									<div class="menu-item-actions" style="margin-top: auto;">
+										<button class="btn-add-cart" data-translate="menu.actions.add">🛒 Agregar</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="menu-item-list animate-box" data-item="cheese" data-price="28.50" data-image="images/gallery_2.jpeg">
+								<img src="images/gallery_2.jpeg" alt="Tabla de Quesos Artesanales">
+								<div class="menu-item-content">
+									<div class="menu-item-header">
+										<h4 class="menu-item-title" data-translate="menu.items.cheese.name">Tabla de Quesos Artesanales</h4>
+										<span class="menu-item-price" data-price-usd="28.50">$28<sup>.50</sup></span>
+									</div>
+									<div class="menu-item-badges">
+										<span class="menu-badge badge-new" data-translate="menu.badges.new">🔥 Nuevo</span>
+									</div>
+									<p class="menu-item-description" data-translate="menu.items.cheese.description">Selección de 5 quesos artesanales, miel de abeja, nueces caramelizadas, mermelada de higo y pan artesanal tostado.</p>
+									<div class="menu-item-actions" style="margin-top: auto;">
+										<button class="btn-add-cart" data-translate="menu.actions.add">🛒 Agregar</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="menu-item-list animate-box" data-item="ceviche" data-price="22.95" data-image="images/gallery_3.jpeg">
+								<img src="images/gallery_3.jpeg" alt="Ceviche de Pescado Fresco">
+								<div class="menu-item-content">
+									<div class="menu-item-header">
+										<h4 class="menu-item-title" data-translate="menu.items.ceviche.name">Ceviche de Pescado Fresco</h4>
+										<span class="menu-item-price" data-price-usd="22.95">$22<sup>.95</sup></span>
+									</div>
+									<div class="menu-item-badges">
+										<span class="menu-badge badge-healthy" data-translate="menu.badges.healthy">💚 Saludable</span>
+										<span class="menu-badge badge-spicy" data-translate="menu.badges.spicy">🌶️ Picante</span>
+									</div>
+									<p class="menu-item-description" data-translate="menu.items.ceviche.description">Pescado del día marinado en limón, cebolla morada, cilantro, ají amarillo, camote y choclo peruano.</p>
+									<div class="menu-item-actions" style="margin-top: auto;">
+										<button class="btn-add-cart" data-translate="menu.actions.add">🛒 Agregar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- PLATOS FUERTES -->
+					<div class="menu-category" data-category="principales">
+						<h3 style="color: #ea272d; margin-bottom: 30px; font-size: 28px; font-family: 'Cormorant Garamond', Georgia, serif;">🍖 <span data-translate="menu.categories.mains">Platos Fuertes</span></h3>
+
+						<div class="menu-items-grid">
+							<div class="menu-item-list animate-box" data-item="wellington" data-price="45.00" data-image="images/gallery_4.jpeg">
+								<img src="images/gallery_4.jpeg" alt="Filete Wellington Premium">
+								<div class="menu-item-content">
+									<div class="menu-item-header">
+										<h4 class="menu-item-title" data-translate="menu.items.wellington.name">Filete Wellington Premium</h4>
+										<span class="menu-item-price" data-price-usd="45.00">$45<sup>.00</sup></span>
+									</div>
+									<div class="menu-item-badges">
+										<span class="menu-badge badge-chef" data-translate="menu.badges.chef">👨‍🍳 Especialidad del Chef</span>
+										<span class="menu-badge badge-bestseller" data-translate="menu.badges.bestseller">⭐ Más Vendido</span>
+									</div>
+									<p class="menu-item-description" data-translate="menu.items.wellington.description">Filete de res envuelto en masa hojaldre, foie gras, duxelles de hongos, acompañado de puré de papa trufa y vegetales glaseados.</p>
+									<div class="menu-item-actions" style="margin-top: auto;">
+										<button class="btn-add-cart" data-translate="menu.actions.add">🛒 Agregar</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="menu-item-list animate-box" data-item="salmon" data-price="32.95" data-image="images/gallery_5.jpeg">
+								<img src="images/gallery_5.jpeg" alt="Salmón Atlántico Grillado">
+								<div class="menu-item-content">
+									<div class="menu-item-header">
+										<h4 class="menu-item-title" data-translate="menu.items.salmon.name">Salmón Atlántico Grillado</h4>
+										<span class="menu-item-price" data-price-usd="32.95">$32<sup>.95</sup></span>
+									</div>
+									<div class="menu-item-badges">
+										<span class="menu-badge badge-healthy" data-translate="menu.badges.healthy">💚 Saludable</span>
+									</div>
+									<p class="menu-item-description" data-translate="menu.items.salmon.description">Filete de salmón noruego con costra de hierbas mediterráneas, quinoa tricolor, espárragos y salsa de limón.</p>
+									<div class="menu-item-actions" style="margin-top: auto;">
+										<button class="btn-add-cart" data-translate="menu.actions.add">🛒 Agregar</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="menu-item-list animate-box" data-item="risotto" data-price="28.50" data-image="images/gallery_6.jpeg">
+								<img src="images/gallery_6.jpeg" alt="Risotto de Hongos Porcini">
+								<div class="menu-item-content">
+									<div class="menu-item-header">
+										<h4 class="menu-item-title" data-translate="menu.items.risotto.name">Risotto de Hongos Porcini</h4>
+										<span class="menu-item-price" data-price-usd="28.50">$28<sup>.50</sup></span>
+									</div>
+									<div class="menu-item-badges">
+										<span class="menu-badge badge-vegetarian" data-translate="menu.badges.vegetarian">🌱 Vegetariano</span>
+									</div>
+									<p class="menu-item-description" data-translate="menu.items.risotto.description">Arroz arborio cremoso con hongos porcini, parmesano reggiano, mantequilla de trufa y hierbas finas.</p>
+									<div class="menu-item-actions" style="margin-top: auto;">
+										<button class="btn-add-cart" data-translate="menu.actions.add">🛒 Agregar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- POSTRES -->
+					<div class="menu-category" data-category="postres">
+						<h3 style="color: #ea272d; margin-bottom: 30px; font-size: 28px; font-family: 'Cormorant Garamond', Georgia, serif;">🍰 <span data-translate="menu.categories.desserts">Postres</span></h3>
+
+						<div class="menu-items-grid">
+							<div class="menu-item-list animate-box" data-item="tiramisu" data-price="16.95" data-image="images/gallery_7.jpeg">
+								<img src="images/gallery_7.jpeg" alt="Tiramisú Clásico">
+								<div class="menu-item-content">
+									<div class="menu-item-header">
+										<h4 class="menu-item-title" data-translate="menu.items.tiramisu.name">Tiramisú Clásico</h4>
+										<span class="menu-item-price" data-price-usd="16.95">$16<sup>.95</sup></span>
+									</div>
+									<div class="menu-item-badges">
+										<span class="menu-badge badge-bestseller" data-translate="menu.badges.bestseller">⭐ Más Vendido</span>
+									</div>
+									<p class="menu-item-description" data-translate="menu.items.tiramisu.description">Capas de bizcocho empapado en café espresso, crema de mascarpone, cacao en polvo y un toque de amaretto.</p>
+									<div class="menu-item-actions" style="margin-top: auto;">
+										<button class="btn-add-cart" data-translate="menu.actions.add">🛒 Agregar</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="menu-item-list animate-box" data-item="cheesecake" data-price="18.50" data-image="images/gallery_8.jpeg">
+								<img src="images/gallery_8.jpeg" alt="Cheesecake de Frutos Rojos">
+								<div class="menu-item-content">
+									<div class="menu-item-header">
+										<h4 class="menu-item-title" data-translate="menu.items.cheesecake.name">Cheesecake de Frutos Rojos</h4>
+										<span class="menu-item-price" data-price-usd="18.50">$18<sup>.50</sup></span>
+									</div>
+									<div class="menu-item-badges">
+										<span class="menu-badge badge-new" data-translate="menu.badges.new">🔥 Nuevo</span>
+									</div>
+									<p class="menu-item-description" data-translate="menu.items.cheesecake.description">Base de galleta graham, crema de queso philadelphia, coulis de frutos rojos y fresas frescas.</p>
+									<div class="menu-item-actions" style="margin-top: auto;">
+										<button class="btn-add-cart" data-translate="menu.actions.add">🛒 Agregar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- BEBIDAS -->
+					<div class="menu-category" data-category="bebidas">
+						<h3 style="color: #ea272d; margin-bottom: 30px; font-size: 28px; font-family: 'Cormorant Garamond', Georgia, serif;">🍷 <span data-translate="menu.categories.drinks">Bebidas</span></h3>
+
+						<div class="menu-items-grid">
+							<div class="menu-item-list animate-box" data-item="wine" data-price="35.00" data-image="images/gallery_1.jpeg">
+								<img src="images/gallery_1.jpeg" alt="Vino Tinto Reserva">
+								<div class="menu-item-content">
+									<div class="menu-item-header">
+										<h4 class="menu-item-title" data-translate="menu.items.wine.name">Vino Tinto Reserva</h4>
+										<span class="menu-item-price" data-price-usd="35.00">$35<sup>.00</sup></span>
+									</div>
+									<div class="menu-item-badges">
+										<span class="menu-badge badge-chef" data-translate="menu.badges.chef">🍷 Selección Sommelier</span>
+									</div>
+									<p class="menu-item-description" data-translate="menu.items.wine.description">Cabernet Sauvignon reserva, notas a frutos rojos, vainilla y especias. Maridaje perfecto con carnes rojas.</p>
+									<div class="menu-item-actions" style="margin-top: auto;">
+										<button class="btn-add-cart" data-translate="menu.actions.add">🛒 Agregar</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="menu-item-list animate-box" data-item="cocktail" data-price="14.95" data-image="images/gallery_2.jpeg">
+								<img src="images/gallery_2.jpeg" alt="Cóctel Signature Tasty">
+								<div class="menu-item-content">
+									<div class="menu-item-header">
+										<h4 class="menu-item-title" data-translate="menu.items.cocktail.name">Cóctel Signature Tasty</h4>
+										<span class="menu-item-price" data-price-usd="14.95">$14<sup>.95</sup></span>
+									</div>
+									<div class="menu-item-badges">
+										<span class="menu-badge badge-new" data-translate="menu.badges.new">🔥 Exclusivo</span>
+									</div>
+									<p class="menu-item-description" data-translate="menu.items.cocktail.description">Gin premium, licor de elderflower, jugo de limón fresco, pepino y tónica, servido con hielo y menta.</p>
+									<div class="menu-item-actions" style="margin-top: auto;">
+										<button class="btn-add-cart" data-translate="menu.actions.add">🛒 Agregar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- ESPECIALES DEL CHEF -->
+					<div class="menu-category" data-category="especiales">
+						<h3 style="color: #ea272d; margin-bottom: 30px; font-size: 28px; font-family: 'Cormorant Garamond', Georgia, serif;">⭐ <span data-translate="menu.categories.specials">Especiales del Chef</span></h3>
+
+						<div class="menu-items-grid">
+							<div class="menu-item-list animate-box" data-item="tasting" data-price="85.00" data-image="images/gallery_3.jpeg" style="grid-column: 1 / -1;">
+								<img src="images/gallery_3.jpeg" alt="Menú Degustación 7 Tiempos">
+								<div class="menu-item-content">
+									<div class="menu-item-header">
+										<h4 class="menu-item-title" data-translate="menu.items.tasting.name">Menú Degustación 7 Tiempos</h4>
+										<span class="menu-item-price" data-price-usd="85.00">$85<sup>.00</sup></span>
+									</div>
+									<div class="menu-item-badges">
+										<span class="menu-badge badge-chef" data-translate="menu.badges.chef">👨‍🍳 Experiencia Única</span>
+										<span class="menu-badge badge-bestseller" data-translate="menu.badges.bestseller">⭐ Recomendado</span>
+									</div>
+									<p class="menu-item-description" data-translate="menu.items.tasting.description">Viaje gastronómico de 7 platos diseñado por nuestro chef ejecutivo, maridaje de vinos incluido. Reserva con 24h de anticipación.</p>
+									<div class="menu-item-actions" style="margin-top: auto;">
+										<button class="btn-add-cart" data-translate="menu.actions.reserve">📞 Reservar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Vista Mobile - Grid -->
+				<div class="col-md-12 menu-grid-view">
+					<div class="menu-grid">
+
+						<!-- ENTRADAS - Vista Móvil -->
+						<div class="menu-item-card animate-box" data-category="entradas">
+							<img src="images/gallery_1.jpeg" alt="Carpaccio de Res Premium">
+							<div class="menu-card-content">
+								<div class="menu-card-header">
+									<h4 class="menu-card-title" data-translate="menu.items.carpaccio.name">Carpaccio de Res Premium</h4>
+									<span class="menu-card-price">$24<sup>.95</sup></span>
+								</div>
+								<div class="menu-item-badges">
+									<span class="menu-badge badge-bestseller">⭐</span>
+									<span class="menu-badge badge-chef">👨‍🍳</span>
+								</div>
+								<p class="menu-card-description" data-translate="menu.items.carpaccio.description">Láminas de res angus madurada, rúcula silvestre, parmesano reggiano 24 meses...</p>
+								<button class="btn-add-cart" style="width: 100%;" data-translate="menu.actions.add">🛒 Agregar</button>
+							</div>
+						</div>
+
+						<div class="menu-item-card animate-box" data-category="entradas">
+							<img src="images/gallery_2.jpeg" alt="Tabla de Quesos Artesanales">
+							<div class="menu-card-content">
+								<div class="menu-card-header">
+									<h4 class="menu-card-title" data-translate="menu.items.cheese.name">Tabla de Quesos Artesanales</h4>
+									<span class="menu-card-price">$28<sup>.50</sup></span>
+								</div>
+								<div class="menu-item-badges">
+									<span class="menu-badge badge-new">🔥</span>
+								</div>
+								<p class="menu-card-description" data-translate="menu.items.cheese.description">Selección de 5 quesos artesanales, miel de abeja, nueces caramelizadas...</p>
+								<button class="btn-add-cart" style="width: 100%;" data-translate="menu.actions.add">🛒 Agregar</button>
+							</div>
+						</div>
+
+						<div class="menu-item-card animate-box" data-category="entradas">
+							<img src="images/gallery_3.jpeg" alt="Ceviche de Pescado Fresco">
+							<div class="menu-card-content">
+								<div class="menu-card-header">
+									<h4 class="menu-card-title" data-translate="menu.items.ceviche.name">Ceviche de Pescado Fresco</h4>
+									<span class="menu-card-price">$22<sup>.95</sup></span>
+								</div>
+								<div class="menu-item-badges">
+									<span class="menu-badge badge-healthy">💚</span>
+									<span class="menu-badge badge-spicy">🌶️</span>
+								</div>
+								<p class="menu-card-description" data-translate="menu.items.ceviche.description">Pescado del día marinado en limón, cebolla morada, cilantro...</p>
+								<button class="btn-add-cart" style="width: 100%;" data-translate="menu.actions.add">🛒 Agregar</button>
+							</div>
+						</div>
+
+						<!-- PLATOS FUERTES - Vista Móvil -->
+						<div class="menu-item-card animate-box" data-category="principales">
+							<img src="images/gallery_4.jpeg" alt="Filete Wellington Premium">
+							<div class="menu-card-content">
+								<div class="menu-card-header">
+									<h4 class="menu-card-title" data-translate="menu.items.wellington.name">Filete Wellington Premium</h4>
+									<span class="menu-card-price">$45<sup>.00</sup></span>
+								</div>
+								<div class="menu-item-badges">
+									<span class="menu-badge badge-chef">👨‍🍳</span>
+									<span class="menu-badge badge-bestseller">⭐</span>
+								</div>
+								<p class="menu-card-description" data-translate="menu.items.wellington.description">Filete de res envuelto en masa hojaldre, foie gras, duxelles de hongos...</p>
+								<button class="btn-add-cart" style="width: 100%;" data-translate="menu.actions.add">🛒 Agregar</button>
+							</div>
+						</div>
+
+						<div class="menu-item-card animate-box" data-category="principales">
+							<img src="images/gallery_5.jpeg" alt="Salmón Atlántico Grillado">
+							<div class="menu-card-content">
+								<div class="menu-card-header">
+									<h4 class="menu-card-title" data-translate="menu.items.salmon.name">Salmón Atlántico Grillado</h4>
+									<span class="menu-card-price">$32<sup>.95</sup></span>
+								</div>
+								<div class="menu-item-badges">
+									<span class="menu-badge badge-healthy">💚</span>
+								</div>
+								<p class="menu-card-description" data-translate="menu.items.salmon.description">Filete de salmón noruego con costra de hierbas mediterráneas...</p>
+								<button class="btn-add-cart" style="width: 100%;" data-translate="menu.actions.add">🛒 Agregar</button>
+							</div>
+						</div>
+
+						<div class="menu-item-card animate-box" data-category="principales">
+							<img src="images/gallery_6.jpeg" alt="Risotto de Hongos Porcini">
+							<div class="menu-card-content">
+								<div class="menu-card-header">
+									<h4 class="menu-card-title" data-translate="menu.items.risotto.name">Risotto de Hongos Porcini</h4>
+									<span class="menu-card-price">$28<sup>.50</sup></span>
+								</div>
+								<div class="menu-item-badges">
+									<span class="menu-badge badge-vegetarian">🌱</span>
+								</div>
+								<p class="menu-card-description" data-translate="menu.items.risotto.description">Arroz arborio cremoso con hongos porcini, parmesano reggiano...</p>
+								<button class="btn-add-cart" style="width: 100%;" data-translate="menu.actions.add">🛒 Agregar</button>
+							</div>
+						</div>
+
+						<!-- POSTRES - Vista Móvil -->
+						<div class="menu-item-card animate-box" data-category="postres">
+							<img src="images/gallery_7.jpeg" alt="Tiramisú Clásico">
+							<div class="menu-card-content">
+								<div class="menu-card-header">
+									<h4 class="menu-card-title" data-translate="menu.items.tiramisu.name">Tiramisú Clásico</h4>
+									<span class="menu-card-price">$16<sup>.95</sup></span>
+								</div>
+								<div class="menu-item-badges">
+									<span class="menu-badge badge-bestseller">⭐</span>
+								</div>
+								<p class="menu-card-description" data-translate="menu.items.tiramisu.description">Capas de bizcocho empapado en café espresso, crema de mascarpone...</p>
+								<button class="btn-add-cart" style="width: 100%;" data-translate="menu.actions.add">🛒 Agregar</button>
+							</div>
+						</div>
+
+						<div class="menu-item-card animate-box" data-category="postres">
+							<img src="images/gallery_8.jpeg" alt="Cheesecake de Frutos Rojos">
+							<div class="menu-card-content">
+								<div class="menu-card-header">
+									<h4 class="menu-card-title" data-translate="menu.items.cheesecake.name">Cheesecake de Frutos Rojos</h4>
+									<span class="menu-card-price">$18<sup>.50</sup></span>
+								</div>
+								<div class="menu-item-badges">
+									<span class="menu-badge badge-new">🔥</span>
+								</div>
+								<p class="menu-card-description" data-translate="menu.items.cheesecake.description">Base de galleta graham, crema de queso philadelphia, coulis de frutos rojos...</p>
+								<button class="btn-add-cart" style="width: 100%;" data-translate="menu.actions.add">🛒 Agregar</button>
+							</div>
+						</div>
+
+						<!-- BEBIDAS - Vista Móvil -->
+						<div class="menu-item-card animate-box" data-category="bebidas">
+							<img src="images/gallery_1.jpeg" alt="Vino Tinto Reserva">
+							<div class="menu-card-content">
+								<div class="menu-card-header">
+									<h4 class="menu-card-title" data-translate="menu.items.wine.name">Vino Tinto Reserva</h4>
+									<span class="menu-card-price">$35<sup>.00</sup></span>
+								</div>
+								<div class="menu-item-badges">
+									<span class="menu-badge badge-chef">🍷</span>
+								</div>
+								<p class="menu-card-description" data-translate="menu.items.wine.description">Cabernet Sauvignon reserva, notas a frutos rojos, vainilla y especias...</p>
+								<button class="btn-add-cart" style="width: 100%;" data-translate="menu.actions.add">🛒 Agregar</button>
+							</div>
+						</div>
+
+						<div class="menu-item-card animate-box" data-category="bebidas">
+							<img src="images/gallery_2.jpeg" alt="Cóctel Signature Tasty">
+							<div class="menu-card-content">
+								<div class="menu-card-header">
+									<h4 class="menu-card-title" data-translate="menu.items.cocktail.name">Cóctel Signature Tasty</h4>
+									<span class="menu-card-price">$14<sup>.95</sup></span>
+								</div>
+								<div class="menu-item-badges">
+									<span class="menu-badge badge-new">🔥</span>
+								</div>
+								<p class="menu-card-description" data-translate="menu.items.cocktail.description">Gin premium, licor de elderflower, jugo de limón fresco, pepino...</p>
+								<button class="btn-add-cart" style="width: 100%;" data-translate="menu.actions.add">🛒 Agregar</button>
+							</div>
+						</div>
+
+						<!-- ESPECIALES - Vista Móvil -->
+						<div class="menu-item-card animate-box" data-category="especiales">
+							<img src="images/gallery_3.jpeg" alt="Menú Degustación 7 Tiempos">
+							<div class="menu-card-content">
+								<div class="menu-card-header">
+									<h4 class="menu-card-title" data-translate="menu.items.tasting.name">Menú Degustación 7 Tiempos</h4>
+									<span class="menu-card-price">$85<sup>.00</sup></span>
+								</div>
+								<div class="menu-item-badges">
+									<span class="menu-badge badge-chef">👨‍🍳</span>
+									<span class="menu-badge badge-bestseller">⭐</span>
+								</div>
+								<p class="menu-card-description" data-translate="menu.items.tasting.description">Viaje gastronómico de 7 platos diseñado por nuestro chef ejecutivo...</p>
+								<button class="btn-add-cart" style="width: 100%;" data-translate="menu.actions.reserve">📞 Reservar</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="fh5co-featured-testimony" class="fh5co-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 fh5co-heading animate-box">
+					<h2 data-translate="pages.menu.testimonials.title">Testimonios</h2>
+					<div class="row">
+						<div class="col-md-6">
+							<p data-translate="pages.menu.testimonials.description">Lo que nuestros comensales dicen sobre la experiencia gastronómica en nuestro restaurante.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-5 animate-box img-to-responsive">
+						<img src="images/person_1.jpg" alt="">
+				</div>
+				<div class="col-md-7 animate-box">
+					<blockquote>
+						<p data-translate="testimonials.quote"> &ldquo; Sin duda el mejor restaurante de la zona. La atención es excepcional y cada plato es una obra de arte. Llevamos años viniendo en familia y siempre nos sorprenden con nuevos sabores. El ambiente es perfecto para cualquier ocasión especial. &rdquo;</p>
+						<p class="author"><cite data-translate="testimonials.author">&mdash; María Elena Vásquez, Cliente Frecuente</cite></p>
+					</blockquote>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="fh5co-started" class="fh5co-section animate-box" style="background-image: url(images/hero_1.jpeg);" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>Book a Table</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae enim quae vitae cupiditate, sequi quam ea id dolor reiciendis consectetur repudiandae. Rem quam, repellendus veniam ipsa fuga maxime odio? Eaque!</p>
+					<p><a href="reservation.html" class="btn btn-primary btn-outline">Book Now</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer id="fh5co-footer" role="contentinfo" class="fh5co-section">
+		<div class="container">
+			<div class="row row-pb-md">
+				<div class="col-md-4 fh5co-widget">
+					<h4 data-translate="footer.about.title">Restaurante Tasty</h4>
+					<p data-translate="footer.about.description">Desde 1995 ofreciendo la mejor experiencia gastronómica con ingredientes frescos y recetas tradicionales en un ambiente familiar y acogedor.</p>
+				</div>
+				<div class="col-md-2 col-md-push-1 fh5co-widget">
+					<h4 data-translate="footer.links.title">Enlaces Rápidos</h4>
+					<ul class="fh5co-footer-links">
+						<li><a href="index.html" data-translate="footer.links.home">Inicio</a></li>
+						<li><a href="about.html" data-translate="footer.links.about">Nosotros</a></li>
+						<li><a href="menu.html" data-translate="nav.menu">Menú</a></li>
+						<li><a href="gallery.html" data-translate="nav.gallery">Galería</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-2 col-md-push-1 fh5co-widget">
+					<h4 data-translate="footer.links.title">Enlaces Rápidos</h4>
+					<ul class="fh5co-footer-links">
+						<li><a href="reservation.html" data-translate="nav.reservation">Reservación</a></li>
+						<li><a href="contact.html" data-translate="nav.contact">Contacto</a></li>
+						<li><a href="#" data-translate="nav.events">Eventos</a></li>
+						<li><a href="#" onclick="return false;">Horarios: 12:00-23:00</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-4 col-md-push-1 fh5co-widget">
+					<h4 data-translate="footer.contact.title">Contáctanos</h4>
+					<ul class="fh5co-footer-links">
+						<li data-translate="footer.contact.address">Av. Reforma 1847, Col. Lomas de Chapultepec, <br> CDMX 11000</li>
+						<li><a href="tel://525555550123" data-translate="footer.contact.phone">+52 55 5555-0123</a></li>
+						<li><a href="mailto:reservas@restaurantetasty.com" data-translate="footer.contact.email">reservas@restaurantetasty.com</a></li>
+						<li><a href="#" onclick="return false;">Horarios: Lun-Dom 12:00-23:00</a></li>
+					</ul>
+				</div>
+
+			</div>
+
+			<div class="row copyright">
+				<div class="col-md-12 text-center">
+					<p>
+						<small class="block" data-translate="footer.copyright">&copy; 2024 Restaurante Tasty. Todos los derechos reservados.</small>
+						<small class="block">Síguenos en redes sociales para promociones especiales</small>
+					</p>
+					<p>
+						<ul class="fh5co-social-icons">
+							<li><a href="#"><i class="icon-twitter2"></i></a></li>
+							<li><a href="#"><i class="icon-facebook2"></i></a></li>
+							<li><a href="#"><i class="icon-linkedin2"></i></a></li>
+							<li><a href="#"><i class="icon-dribbble2"></i></a></li>
+						</ul>
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up22"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.stellar.min.js"></script>
+	<!-- Flexslider -->
+	<script src="js/jquery.flexslider-min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+	<!-- Sistema Multiidioma -->
+	<script src="js/translations.js"></script>
+	<script src="js/language-manager.js"></script>
+
+	<!-- Carrito Flotante -->
+	<button class="floating-cart" id="floatingCart">
+		🛒 <span data-translate="cart.view">Ver Pedido</span>
+		<span class="cart-count" id="cartCount">0</span>
+	</button>
+
+	<!-- Overlay del Carrito -->
+	<div class="cart-overlay" id="cartOverlay"></div>
+
+	<!-- Panel del Carrito -->
+	<div class="cart-panel" id="cartPanel">
+		<div class="cart-header">
+			<h3 data-translate="cart.title">Mi Pedido</h3>
+			<button class="cart-close" id="cartClose">×</button>
+		</div>
+		<div class="cart-items" id="cartItems">
+			<div style="text-align: center; padding: 40px; color: #666;">
+				<p data-translate="cart.empty">Tu pedido está vacío</p>
+				<p style="font-size: 14px;" data-translate="cart.empty.subtitle">Agrega algunos platos deliciosos</p>
+			</div>
+		</div>
+		<div class="cart-footer">
+			<div class="cart-total">
+				<span data-translate="cart.total">Total:</span>
+				<span class="cart-total-price" id="cartTotal">$0.00</span>
+			</div>
+			<button class="cart-clear" id="cartClear" data-translate="cart.clear">Limpiar Pedido</button>
+		</div>
+	</div>
+
+	<!-- JavaScript del Menú Híbrido con Carrito -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			// Variables globales
+			let cart = [];
+			let currentLanguage = localStorage.getItem('selectedLanguage') || 'es';
+			const exchangeRate = 20.5; // 1 USD = 20.5 MXN (puedes actualizar esto)
+
+			// Elementos del DOM
+			const filterButtons = document.querySelectorAll('.filter-btn');
+			const menuCategories = document.querySelectorAll('.menu-category');
+			const menuCards = document.querySelectorAll('.menu-item-card');
+			const floatingCart = document.getElementById('floatingCart');
+			const cartPanel = document.getElementById('cartPanel');
+			const cartOverlay = document.getElementById('cartOverlay');
+			const cartClose = document.getElementById('cartClose');
+			const cartItems = document.getElementById('cartItems');
+			const cartCount = document.getElementById('cartCount');
+			const cartTotal = document.getElementById('cartTotal');
+			const cartClear = document.getElementById('cartClear');
+
+			// Función para convertir precios
+			function convertPrice(usdPrice, targetCurrency) {
+				if (targetCurrency === 'MXN') {
+					return (usdPrice * exchangeRate).toFixed(2);
+				}
+				return usdPrice.toFixed(2);
+			}
+
+			// Función para formatear precio
+			function formatPrice(price, currency) {
+				if (currency === 'MXN') {
+					return `$${price} MXN`;
+				}
+				return `$${price} USD`;
+			}
+
+			// Función para actualizar precios en la página
+			function updatePrices() {
+				const currency = currentLanguage === 'es' ? 'MXN' : 'USD';
+				document.querySelectorAll('[data-price-usd]').forEach(element => {
+					const usdPrice = parseFloat(element.dataset.priceUsd);
+					const convertedPrice = convertPrice(usdPrice, currency);
+					const formattedPrice = currency === 'MXN' ?
+						`$${Math.floor(convertedPrice)}<sup>.${(convertedPrice % 1).toFixed(2).slice(2)}</sup>` :
+						`$${Math.floor(usdPrice)}<sup>.${(usdPrice % 1).toFixed(2).slice(2)}</sup>`;
+					element.innerHTML = formattedPrice;
+				});
+			}
+
+			// Función para mostrar/ocultar categorías en vista desktop
+			function filterDesktopCategories(category) {
+				menuCategories.forEach(cat => {
+					if (category === 'all') {
+						cat.classList.add('active');
+					} else {
+						if (cat.dataset.category === category) {
+							cat.classList.add('active');
+						} else {
+							cat.classList.remove('active');
+						}
+					}
+				});
+			}
+
+			// Función para mostrar/ocultar tarjetas en vista móvil
+			function filterMobileCards(category) {
+				menuCards.forEach(card => {
+					if (category === 'all') {
+						card.style.display = 'block';
+					} else {
+						if (card.dataset.category === category) {
+							card.style.display = 'block';
+						} else {
+							card.style.display = 'none';
+						}
+					}
+				});
+			}
+
+			// Función para agregar al carrito
+			function addToCart(item) {
+				const existingItem = cart.find(cartItem => cartItem.id === item.id);
+
+				if (existingItem) {
+					existingItem.quantity += 1;
+				} else {
+					cart.push({...item, quantity: 1});
+				}
+
+				updateCartDisplay();
+				showCartButton();
+			}
+
+			// Función para remover del carrito
+			function removeFromCart(itemId) {
+				cart = cart.filter(item => item.id !== itemId);
+				updateCartDisplay();
+
+				if (cart.length === 0) {
+					hideCartButton();
+				}
+			}
+
+			// Función para limpiar carrito
+			function clearCart() {
+				cart = [];
+				updateCartDisplay();
+				hideCartButton();
+				closeCart();
+			}
+
+			// Función para mostrar botón flotante
+			function showCartButton() {
+				floatingCart.classList.add('show');
+			}
+
+			// Función para ocultar botón flotante
+			function hideCartButton() {
+				floatingCart.classList.remove('show');
+			}
+
+			// Función para abrir carrito
+			function openCart() {
+				cartPanel.classList.add('open');
+				cartOverlay.classList.add('show');
+				document.body.style.overflow = 'hidden';
+			}
+
+			// Función para cerrar carrito
+			function closeCart() {
+				cartPanel.classList.remove('open');
+				cartOverlay.classList.remove('show');
+				document.body.style.overflow = 'auto';
+			}
+
+			// Función para actualizar display del carrito
+			function updateCartDisplay() {
+				const currency = currentLanguage === 'es' ? 'MXN' : 'USD';
+
+				// Actualizar contador
+				const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+				cartCount.textContent = totalItems;
+
+				// Actualizar items del carrito
+				if (cart.length === 0) {
+					cartItems.innerHTML = `
+						<div style="text-align: center; padding: 40px; color: #666;">
+							<p data-translate="cart.empty">Tu pedido está vacío</p>
+							<p style="font-size: 14px;" data-translate="cart.empty.subtitle">Agrega algunos platos deliciosos</p>
+						</div>
+					`;
+				} else {
+					cartItems.innerHTML = cart.map(item => {
+						const price = convertPrice(item.price, currency);
+						return `
+							<div class="cart-item">
+								<img src="${item.image}" alt="${item.name}">
+								<div class="cart-item-info">
+									<div class="cart-item-name">${item.name}</div>
+									<div class="cart-item-price">${formatPrice(price, currency)} x ${item.quantity}</div>
+								</div>
+								<button class="cart-item-remove" onclick="removeFromCart('${item.id}')">×</button>
+							</div>
+						`;
+					}).join('');
+				}
+
+				// Actualizar total
+				const total = cart.reduce((sum, item) => {
+					const price = convertPrice(item.price, currency);
+					return sum + (parseFloat(price) * item.quantity);
+				}, 0);
+
+				cartTotal.textContent = formatPrice(total.toFixed(2), currency);
+			}
+
+			// Event listeners para los filtros
+			filterButtons.forEach(button => {
+				button.addEventListener('click', function(e) {
+					e.preventDefault();
+
+					// Remover clase active de todos los botones
+					filterButtons.forEach(btn => btn.classList.remove('active'));
+
+					// Agregar clase active al botón clickeado
+					this.classList.add('active');
+
+					// Obtener la categoría
+					const category = this.dataset.filter;
+
+					// Aplicar filtros
+					filterDesktopCategories(category);
+					filterMobileCards(category);
+
+					// Animación suave
+					document.querySelectorAll('.animate-box').forEach(element => {
+						element.style.opacity = '0';
+						setTimeout(() => {
+							element.style.opacity = '1';
+						}, 100);
+					});
+				});
+			});
+
+			// Event listeners para botones "Agregar"
+			document.querySelectorAll('.btn-add-cart').forEach(button => {
+				button.addEventListener('click', function() {
+					// Efecto visual
+					this.style.transform = 'scale(0.95)';
+					this.style.background = '#45b892';
+
+					setTimeout(() => {
+						this.style.transform = 'scale(1)';
+						this.style.background = '#52d3aa';
+					}, 150);
+
+					// Obtener información del item
+					const itemElement = this.closest('.menu-item-list, .menu-item-card');
+					const item = {
+						id: itemElement.dataset.item,
+						name: itemElement.querySelector('.menu-item-title, .menu-card-title').textContent,
+						price: parseFloat(itemElement.dataset.price),
+						image: itemElement.dataset.image || itemElement.querySelector('img').src
+					};
+
+					// Agregar al carrito
+					addToCart(item);
+				});
+			});
+
+			// Event listeners del carrito
+			floatingCart.addEventListener('click', openCart);
+			cartClose.addEventListener('click', closeCart);
+			cartOverlay.addEventListener('click', closeCart);
+			cartClear.addEventListener('click', clearCart);
+
+			// Hacer funciones globales
+			window.removeFromCart = removeFromCart;
+
+			// Escuchar cambios de idioma
+			document.addEventListener('languageChanged', function(e) {
+				currentLanguage = e.detail.language;
+				updatePrices();
+				updateCartDisplay();
+			});
+
+			// Inicializar
+			filterDesktopCategories('all');
+			filterMobileCards('all');
+			updatePrices();
+		});
+	</script>
+
+	</body>
+</html>
+
