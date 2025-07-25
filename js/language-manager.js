@@ -220,10 +220,10 @@ const languageSelectorCSS = `
         top: 15px;
         right: 15px;
     }
-    
+
     .lang-btn {
-        padding: 6px 10px;
-        font-size: 11px;
+        padding: 5px 8px;
+        font-size: 10px;
     }
     
     .lang-text {

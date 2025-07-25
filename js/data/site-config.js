@@ -70,10 +70,10 @@ const SiteConfig = {
         enabled: true,
         updateStrategy: "immediate", // immediate, lazy, manual
         offlinePages: [
-            "/",
-            "/index.html",
-            "/menu.html",
-            "/contact.html"
+            "./",
+            "./index.html",
+            "./menu.html",
+            "./contact.html"
         ],
         notifications: {
             enabled: false,

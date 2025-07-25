@@ -1,107 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-    
-    <!-- Homepage -->
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+        
+    <!-- Página Principal -->
     <url>
-        <loc>https://alexrodriguez-videographer.com/</loc>
-        <lastmod>2024-01-20</lastmod>
+        <loc>https://restaurantetasty.com/</loc>
+        <lastmod>2024-12-23</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <image:image>
-            <image:loc>https://alexrodriguez-videographer.com/img/tn-01.jpg</image:loc>
-            <image:title>Mountain Escape - Professional Videography</image:title>
-            <image:caption>Cinematic nature film showcasing professional videography skills</image:caption>
+            <image:loc>https://restaurantetasty.com/images/gallery_1.jpeg</image:loc>
+            <image:title>Restaurante Tasty - Ambiente Elegante</image:title>
+            <image:caption>Salón principal con iluminación cálida y decoración sofisticada</image:caption>
         </image:image>
         <image:image>
-            <image:loc>https://alexrodriguez-videographer.com/img/tn-02.jpg</image:loc>
-            <image:title>City Life Chronicles - Urban Timelapse</image:title>
-            <image:caption>Professional urban timelapse videography</image:caption>
+            <image:loc>https://restaurantetasty.com/images/gallery_8.jpeg</image:loc>
+            <image:title>Especialidad del Chef - Salmón a la Parrilla</image:title>
+            <image:caption>Salmón atlántico con quinoa tricolor y reducción de vino blanco</image:caption>
         </image:image>
-        <image:image>
-            <image:loc>https://alexrodriguez-videographer.com/img/tn-03.jpg</image:loc>
-            <image:title>Coastal Memories - Wedding Videography</image:title>
-            <image:caption>Professional wedding and event videography</image:caption>
-        </image:image>
-        <video:video>
-            <video:thumbnail_loc>https://alexrodriguez-videographer.com/img/tn-01.jpg</video:thumbnail_loc>
-            <video:title>Mountain Escape - Cinematic Nature Film</video:title>
-            <video:description>Professional videography showcasing the serene beauty of the Rocky Mountains</video:description>
-            <video:content_loc>https://alexrodriguez-videographer.com/video/mountain-escape.mp4</video:content_loc>
-            <video:duration>225</video:duration>
-            <video:publication_date>2024-01-15</video:publication_date>
-            <video:family_friendly>yes</video:family_friendly>
-            <video:tag>videography</video:tag>
-            <video:tag>nature</video:tag>
-            <video:tag>colorado</video:tag>
-            <video:tag>cinematic</video:tag>
-        </video:video>
     </url>
     
-    <!-- About Page -->
+    <!-- Página de Menú -->
     <url>
-        <loc>https://alexrodriguez-videographer.com/about.html</loc>
-        <lastmod>2024-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <!-- Contact Page -->
-    <url>
-        <loc>https://alexrodriguez-videographer.com/contact.html</loc>
-        <lastmod>2024-01-18</lastmod>
+        <loc>https://restaurantetasty.com/menu.html</loc>
+        <lastmod>2024-12-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_8.jpeg</image:loc>
+            <image:title>Menú Gourmet - Especialidad del Chef</image:title>
+            <image:caption>Salmón a la parrilla con quinoa tricolor, especialidad de la casa</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_9.jpeg</image:loc>
+            <image:title>Pasta Artesanal</image:title>
+            <image:caption>Pasta fresca hecha en casa con salsa de tomates San Marzano</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_7.jpeg</image:loc>
+            <image:title>Postre Signature - Tiramisú</image:title>
+            <image:caption>Tiramisú clásico con toque especial de café espresso</image:caption>
+        </image:image>
     </url>
     
-    <!-- Video Page -->
+    <!-- Página de Galería -->
     <url>
-        <loc>https://alexrodriguez-videographer.com/video-page.html</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://restaurantetasty.com/gallery.html</loc>
+        <lastmod>2024-12-23</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-        <video:video>
-            <video:thumbnail_loc>https://alexrodriguez-videographer.com/img/tn-featured.jpg</video:thumbnail_loc>
-            <video:title>Professional Cinematic Footage</video:title>
-            <video:description>Stunning piece showcasing the artistry of professional cinematography</video:description>
-            <video:content_loc>https://alexrodriguez-videographer.com/video/featured-work.mp4</video:content_loc>
-            <video:duration>180</video:duration>
-            <video:publication_date>2024-01-15</video:publication_date>
-            <video:family_friendly>yes</video:family_friendly>
-            <video:tag>professional videography</video:tag>
-            <video:tag>cinematic</video:tag>
-            <video:tag>colorado videographer</video:tag>
-        </video:video>
-    </url>
-    
-    <!-- Service Pages (Virtual URLs for SEO) -->
-    <url>
-        <loc>https://alexrodriguez-videographer.com/wedding-videography</loc>
-        <lastmod>2024-01-18</lastmod>
-        <changefreq>monthly</changefreq>
         <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_1.jpeg</image:loc>
+            <image:title>Ambiente - Salón Principal</image:title>
+            <image:caption>Ambiente elegante con iluminación cálida y decoración sofisticada</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_2.jpeg</image:loc>
+            <image:title>Ambiente - Área VIP</image:title>
+            <image:caption>Espacio exclusivo para ocasiones especiales y celebraciones íntimas</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_3.jpeg</image:loc>
+            <image:title>Ambiente - Terraza Exterior</image:title>
+            <image:caption>Comedor al aire libre con vista panorámica y ambiente relajado</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_4.jpeg</image:loc>
+            <image:title>Ambiente - Área del Bar</image:title>
+            <image:caption>Barra de cócteles con ambiente sofisticado y mixología premium</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_5.jpeg</image:loc>
+            <image:title>Eventos - Celebración Familiar</image:title>
+            <image:caption>Reuniones familiares en un ambiente cálido y acogedor</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_6.jpeg</image:loc>
+            <image:title>Platos - Presentación Gourmet</image:title>
+            <image:caption>Presentación artística de alta cocina con ingredientes de temporada</image:caption>
+        </image:image>
     </url>
     
+    <!-- Página de Reservaciones -->
     <url>
-        <loc>https://alexrodriguez-videographer.com/corporate-video-production</loc>
-        <lastmod>2024-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
+        <loc>https://restaurantetasty.com/reservation.html</loc>
+        <lastmod>2024-12-23</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_5.jpeg</image:loc>
+            <image:title>Reservaciones - Mesa para Eventos Especiales</image:title>
+            <image:caption>Reserva tu mesa para celebraciones familiares y eventos especiales</image:caption>
+        </image:image>
     </url>
     
+    <!-- Página de Contacto -->
     <url>
-        <loc>https://alexrodriguez-videographer.com/drone-cinematography</loc>
-        <lastmod>2024-01-18</lastmod>
+        <loc>https://restaurantetasty.com/contact.html</loc>
+        <lastmod>2024-12-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-    </url>
-    
-    <url>
-        <loc>https://alexrodriguez-videographer.com/event-documentation</loc>
-        <lastmod>2024-01-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/gallery_1.jpeg</image:loc>
+            <image:title>Contacto - Ubicación Restaurante Tasty</image:title>
+            <image:caption>Visítanos en Av. Reforma 123, Ciudad de México</image:caption>
+        </image:image>
     </url>
     
 </urlset>

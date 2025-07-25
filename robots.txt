@@ -1,10 +1,24 @@
-# Robots.txt for Alex Rodriguez Videographer Portfolio
-# https://alexrodriguez-videographer.com/robots.txt
+# Robots.txt para Restaurante Tasty
+# https://restaurantetasty.com/robots.txt
 
 User-agent: *
 Allow: /
 
-# Allow all major search engines
+# Permitir acceso a recursos importantes
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /fonts/
+
+# Bloquear archivos innecesarios
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /*.log$
+Disallow: /*.tmp$
+
+# Permitir específicamente a los bots importantes
 User-agent: Googlebot
 Allow: /
 
@@ -29,24 +43,24 @@ Allow: /
 User-agent: Twitterbot
 Allow: /
 
-# Disallow admin areas (if any)
-Disallow: /admin/
-Disallow: /private/
-Disallow: /.git/
-Disallow: /node_modules/
+User-agent: LinkedInBot
+Allow: /
 
-# Allow CSS and JS for proper rendering
-Allow: /css/
-Allow: /js/
-Allow: /img/
-Allow: /video/
-Allow: /fontawesome/
+User-agent: WhatsApp
+Allow: /
 
-# Sitemap location
-Sitemap: https://alexrodriguez-videographer.com/sitemap.xml
+# Crawl-delay para bots agresivos
+User-agent: AhrefsBot
+Crawl-delay: 10
 
-# Crawl delay (optional - be nice to servers)
-Crawl-delay: 1
+User-agent: MJ12bot
+Crawl-delay: 10
 
-# Host directive (helps with canonicalization)
-Host: https://alexrodriguez-videographer.com
+User-agent: DotBot
+Crawl-delay: 10
+
+# Sitemap
+Sitemap: https://restaurantetasty.com/sitemap.xml
+
+# Host (preferencia de dominio)
+Host: https://restaurantetasty.com

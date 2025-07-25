@@ -1,325 +1,386 @@
-/**
- * Service Worker for Alex Rodriguez Videographer PWA
- * Provides offline functionality, caching, and performance optimization
- */
+/*
+SERVICE WORKER - RESTAURANTE TASTY PWA
+Maneja caché, offline, notificaciones y actualizaciones automáticas
+*/
 
-const CACHE_NAME = 'alex-rodriguez-videographer-v1.2.0';
-const OFFLINE_URL = '/offline.html';
+const CACHE_NAME = 'restaurante-tasty-v1.2';
+const STATIC_CACHE = 'static-v1.2';
+const DYNAMIC_CACHE = 'dynamic-v1.2';
 
-// Assets to cache immediately
-const CRITICAL_ASSETS = [
-  '/',
-  '/index.html',
-  '/about.html', 
-  '/contact.html',
-  '/offline.html',
-  '/css/critical.css',
-  '/css/bootstrap.min.css',
-  '/css/templatemo-video-catalog.css',
-  '/css/lazy-loading.css',
-  '/js/jquery-3.4.1.min.js',
-  '/js/bootstrap.min.js',
-  '/js/gallery.js',
-  '/js/lazy-loading.js',
-  '/js/i18n.js',
-  '/js/dark-mode.js',
-  '/lang/en.json',
-  '/lang/es.json',
-  '/fontawesome/css/all.min.css',
-  '/manifest.json'
+// Recursos críticos que se cachean inmediatamente
+const STATIC_ASSETS = [
+  './',
+  './index.html',
+  './menu.html',
+  './gallery.html',
+  './reservation.html',
+  './contact.html',
+  './manifest.json',
+
+  // CSS
+  './css/animate.css',
+  './css/bootstrap.css',
+  './css/flexslider.css',
+  './css/icomoon.css',
+  './css/style.css',
+  './css/reservation-premium.css',
+  './css/gallery-premium.css',
+
+  // JavaScript
+  './js/jquery.min.js',
+  './js/bootstrap.min.js',
+  './js/jquery.waypoints.min.js',
+  './js/jquery.stellar.min.js',
+  './js/jquery.flexslider-min.js',
+  './js/main.js',
+  './js/translations.js',
+  './js/language-manager.js',
+  './js/seo-manager.js',
+  './js/reservation-system.js',
+  './js/gallery-premium.js',
+
+  // Imágenes críticas
+  './images/gallery_1.jpeg',
+  './images/gallery_2.jpeg',
+  './images/gallery_8.jpeg',
+  './images/hero_1.jpeg',
+
+  // Iconos PWA
+  './images/icons/icon-192x192.png',
+  './images/icons/icon-512x512.png',
+  
+  // Fuentes
+  'https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,600i,700',
+  'https://fonts.googleapis.com/css?family=Satisfy'
 ];
 
-// Assets to cache on demand
-const CACHE_ON_DEMAND = [
-  '/css/modern-gallery.css',
-  '/css/clean-layout.css', 
-  '/css/dark-mode.css',
-  '/js/analytics.js',
-  '/js/background-images.js',
-  '/js/css-loader.js'
+// Recursos que se cachean dinámicamente
+const DYNAMIC_ASSETS = [
+  './images/gallery_3.jpeg',
+  './images/gallery_4.jpeg',
+  './images/gallery_5.jpeg',
+  './images/gallery_6.jpeg',
+  './images/gallery_7.jpeg',
+  './images/gallery_9.jpeg'
 ];
 
-// Image assets (cached with different strategy)
-const IMAGE_CACHE = 'images-v1.0.0';
-
-// Install event - cache critical assets
-self.addEventListener('install', (event) => {
-  console.log('Service Worker installing...');
+// Instalar Service Worker
+self.addEventListener('install', event => {
+  console.log('🔧 Service Worker: Installing...');
   
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('Caching critical assets');
-        return cache.addAll(CRITICAL_ASSETS);
-      })
-      .then(() => {
-        // Skip waiting to activate immediately
-        return self.skipWaiting();
-      })
-      .catch((error) => {
-        console.error('Failed to cache critical assets:', error);
-      })
-  );
-});
-
-// Activate event - clean up old caches
-self.addEventListener('activate', (event) => {
-  console.log('Service Worker activating...');
-  
-  event.waitUntil(
-    caches.keys()
-      .then((cacheNames) => {
-        return Promise.all(
-          cacheNames.map((cacheName) => {
-            if (cacheName !== CACHE_NAME && cacheName !== IMAGE_CACHE) {
-              console.log('Deleting old cache:', cacheName);
-              return caches.delete(cacheName);
-            }
-          })
-        );
-      })
-      .then(() => {
-        // Take control of all clients
-        return self.clients.claim();
-      })
-  );
-});
-
-// Fetch event - handle requests with different strategies
-self.addEventListener('fetch', (event) => {
-  const { request } = event;
-  const url = new URL(request.url);
-
-  // Skip non-GET requests
-  if (request.method !== 'GET') {
-    return;
-  }
-
-  // Skip external requests
-  if (url.origin !== location.origin) {
-    return;
-  }
-
-  // Handle different types of requests
-  if (request.destination === 'image') {
-    event.respondWith(handleImageRequest(request));
-  } else if (isNavigationRequest(request)) {
-    event.respondWith(handleNavigationRequest(request));
-  } else if (isCriticalAsset(request.url)) {
-    event.respondWith(handleCriticalAsset(request));
-  } else {
-    event.respondWith(handleGenericRequest(request));
-  }
-});
-
-// Handle image requests with cache-first strategy
-async function handleImageRequest(request) {
-  try {
-    const cache = await caches.open(IMAGE_CACHE);
-    const cachedResponse = await cache.match(request);
-    
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-
-    const networkResponse = await fetch(request);
-    
-    if (networkResponse.ok) {
-      cache.put(request, networkResponse.clone());
-    }
-    
-    return networkResponse;
-  } catch (error) {
-    console.log('Image request failed:', error);
-    // Return placeholder image
-    return new Response(
-      '<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#f0f0f0"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#999">Image unavailable</text></svg>',
-      { headers: { 'Content-Type': 'image/svg+xml' } }
-    );
-  }
-}
-
-// Handle navigation requests
-async function handleNavigationRequest(request) {
-  try {
-    // Try network first for navigation
-    const networkResponse = await fetch(request);
-    
-    if (networkResponse.ok) {
-      // Cache successful navigation responses
-      const cache = await caches.open(CACHE_NAME);
-      cache.put(request, networkResponse.clone());
-      return networkResponse;
-    }
-    
-    throw new Error('Network response not ok');
-  } catch (error) {
-    console.log('Navigation request failed, serving from cache:', error);
-    
-    // Try to serve from cache
-    const cache = await caches.open(CACHE_NAME);
-    const cachedResponse = await cache.match(request);
-    
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-    
-    // Serve offline page
-    return cache.match(OFFLINE_URL);
-  }
-}
-
-// Handle critical assets with cache-first strategy
-async function handleCriticalAsset(request) {
-  try {
-    const cache = await caches.open(CACHE_NAME);
-    const cachedResponse = await cache.match(request);
-    
-    if (cachedResponse) {
-      // Serve from cache and update in background
-      fetch(request).then((networkResponse) => {
-        if (networkResponse.ok) {
-          cache.put(request, networkResponse);
-        }
-      }).catch(() => {
-        // Ignore network errors for background updates
-      });
+    Promise.all([
+      // Cachear recursos estáticos
+      caches.open(STATIC_CACHE).then(cache => {
+        console.log('📦 Caching static assets...');
+        return cache.addAll(STATIC_ASSETS);
+      }),
       
-      return cachedResponse;
-    }
+      // Cachear recursos dinámicos
+      caches.open(DYNAMIC_CACHE).then(cache => {
+        console.log('🖼️ Caching dynamic assets...');
+        return cache.addAll(DYNAMIC_ASSETS);
+      })
+    ]).then(() => {
+      console.log('✅ Service Worker: Installation complete');
+      // Forzar activación inmediata
+      return self.skipWaiting();
+    }).catch(error => {
+      console.error('❌ Service Worker: Installation failed', error);
+    })
+  );
+});
 
-    // Not in cache, fetch from network
-    const networkResponse = await fetch(request);
+// Activar Service Worker
+self.addEventListener('activate', event => {
+  console.log('🚀 Service Worker: Activating...');
+  
+  event.waitUntil(
+    // Limpiar cachés antiguos
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
+            console.log('🗑️ Deleting old cache:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => {
+      console.log('✅ Service Worker: Activation complete');
+      // Tomar control inmediato de todas las páginas
+      return self.clients.claim();
+    })
+  );
+});
 
-    if (networkResponse.ok && networkResponse.status < 300) {
-      // Only cache complete responses (not partial 206 responses)
-      cache.put(request, networkResponse.clone());
-    }
-
-    return networkResponse;
-  } catch (error) {
-    console.log('Critical asset request failed:', error);
-    throw error;
+// Interceptar requests (estrategia Cache First con Network Fallback)
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  const url = new URL(request.url);
+  
+  // Solo manejar requests HTTP/HTTPS
+  if (!request.url.startsWith('http')) return;
+  
+  // Estrategia específica por tipo de recurso
+  if (isStaticAsset(request.url)) {
+    // Recursos estáticos: Cache First
+    event.respondWith(cacheFirst(request));
+  } else if (isImageRequest(request)) {
+    // Imágenes: Cache First con fallback
+    event.respondWith(cacheFirstWithFallback(request));
+  } else if (isPageRequest(request)) {
+    // Páginas HTML: Network First con Cache Fallback
+    event.respondWith(networkFirstWithCache(request));
+  } else {
+    // Otros recursos: Network First
+    event.respondWith(networkFirst(request));
   }
-}
+});
 
-// Handle generic requests with network-first strategy
-async function handleGenericRequest(request) {
+// Estrategia Cache First
+async function cacheFirst(request) {
   try {
-    const networkResponse = await fetch(request);
-    
-    if (networkResponse.ok) {
-      // Cache successful responses
-      const cache = await caches.open(CACHE_NAME);
-      cache.put(request, networkResponse.clone());
-    }
-    
-    return networkResponse;
-  } catch (error) {
-    // Try to serve from cache
-    const cache = await caches.open(CACHE_NAME);
-    const cachedResponse = await cache.match(request);
-    
+    const cachedResponse = await caches.match(request);
     if (cachedResponse) {
       return cachedResponse;
     }
     
-    throw error;
-  }
-}
-
-// Helper functions
-function isNavigationRequest(request) {
-  return request.mode === 'navigate' || 
-         (request.method === 'GET' && request.headers.get('accept').includes('text/html'));
-}
-
-function isCriticalAsset(url) {
-  return CRITICAL_ASSETS.some(asset => url.includes(asset));
-}
-
-// Background sync for analytics (when online)
-self.addEventListener('sync', (event) => {
-  if (event.tag === 'analytics-sync') {
-    event.waitUntil(syncAnalytics());
-  }
-});
-
-async function syncAnalytics() {
-  // Sync any pending analytics data when back online
-  try {
-    const analyticsData = await getStoredAnalytics();
-    if (analyticsData.length > 0) {
-      await sendAnalyticsData(analyticsData);
-      await clearStoredAnalytics();
+    const networkResponse = await fetch(request);
+    
+    // Cachear la respuesta si es exitosa
+    if (networkResponse.ok) {
+      const cache = await caches.open(STATIC_CACHE);
+      cache.put(request, networkResponse.clone());
     }
+    
+    return networkResponse;
   } catch (error) {
-    console.log('Analytics sync failed:', error);
+    console.error('Cache First failed:', error);
+    return new Response('Offline - Content not available', {
+      status: 503,
+      statusText: 'Service Unavailable'
+    });
   }
 }
 
-// Push notification handling (optional)
-self.addEventListener('push', (event) => {
-  if (!event.data) return;
+// Estrategia Cache First con Fallback
+async function cacheFirstWithFallback(request) {
+  try {
+    const cachedResponse = await caches.match(request);
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    
+    const networkResponse = await fetch(request);
+    
+    if (networkResponse.ok) {
+      const cache = await caches.open(DYNAMIC_CACHE);
+      cache.put(request, networkResponse.clone());
+    }
+    
+    return networkResponse;
+  } catch (error) {
+    // Fallback para imágenes
+    const fallbackImage = await caches.match('/images/gallery_1.jpeg');
+    return fallbackImage || new Response('Image not available offline', {
+      status: 503,
+      statusText: 'Service Unavailable'
+    });
+  }
+}
 
-  const data = event.data.json();
+// Estrategia Network First con Cache
+async function networkFirstWithCache(request) {
+  try {
+    const networkResponse = await fetch(request);
+    
+    if (networkResponse.ok) {
+      const cache = await caches.open(DYNAMIC_CACHE);
+      cache.put(request, networkResponse.clone());
+    }
+    
+    return networkResponse;
+  } catch (error) {
+    console.log('Network failed, trying cache:', request.url);
+    
+    const cachedResponse = await caches.match(request);
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    
+    // Fallback para páginas
+    return getOfflinePage();
+  }
+}
+
+// Estrategia Network First
+async function networkFirst(request) {
+  try {
+    return await fetch(request);
+  } catch (error) {
+    const cachedResponse = await caches.match(request);
+    return cachedResponse || new Response('Resource not available offline', {
+      status: 503,
+      statusText: 'Service Unavailable'
+    });
+  }
+}
+
+// Página offline personalizada
+async function getOfflinePage() {
+  const offlineHTML = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Offline - Restaurante Tasty</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+          color: white;
+          margin: 0;
+          padding: 20px;
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+        .offline-container {
+          max-width: 500px;
+          padding: 40px;
+          background: rgba(255,255,255,0.1);
+          border-radius: 15px;
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(234, 39, 45, 0.3);
+        }
+        h1 { color: #ea272d; font-size: 2.5em; margin-bottom: 20px; }
+        p { font-size: 1.2em; line-height: 1.6; margin-bottom: 30px; }
+        .retry-btn {
+          background: #ea272d;
+          color: white;
+          padding: 15px 30px;
+          border: none;
+          border-radius: 25px;
+          font-size: 1.1em;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        .retry-btn:hover {
+          background: #c21e24;
+          transform: translateY(-2px);
+        }
+        .offline-icon {
+          font-size: 4em;
+          margin-bottom: 20px;
+          opacity: 0.7;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="offline-container">
+        <div class="offline-icon">📶</div>
+        <h1>Sin Conexión</h1>
+        <p>No hay conexión a internet en este momento. Algunas funciones pueden estar limitadas, pero puedes seguir navegando por el contenido que ya has visitado.</p>
+        <button class="retry-btn" onclick="window.location.reload()">
+          Reintentar Conexión
+        </button>
+        <p style="margin-top: 30px; font-size: 0.9em; opacity: 0.8;">
+          <strong>Restaurante Tasty</strong><br>
+          +52 55 5555-0123
+        </p>
+      </div>
+    </body>
+    </html>
+  `;
+  
+  return new Response(offlineHTML, {
+    headers: { 'Content-Type': 'text/html' }
+  });
+}
+
+// Utilidades para clasificar requests
+function isStaticAsset(url) {
+  return url.includes('.css') || 
+         url.includes('.js') || 
+         url.includes('fonts.googleapis.com') ||
+         url.includes('/js/') ||
+         url.includes('/css/');
+}
+
+function isImageRequest(request) {
+  return request.destination === 'image' || 
+         request.url.includes('.jpg') || 
+         request.url.includes('.jpeg') || 
+         request.url.includes('.png') || 
+         request.url.includes('.gif') || 
+         request.url.includes('.webp');
+}
+
+function isPageRequest(request) {
+  return request.mode === 'navigate' || 
+         request.destination === 'document' ||
+         request.url.includes('.html');
+}
+
+// Manejar notificaciones push
+self.addEventListener('push', event => {
+  console.log('📬 Push notification received');
+  
   const options = {
-    body: data.body,
-    icon: '/img/icons/icon-192x192.png',
-    badge: '/img/icons/badge-72x72.png',
+    body: event.data ? event.data.text() : 'Nueva promoción disponible en Restaurante Tasty',
+    icon: '/images/icons/icon-192x192.png',
+    badge: '/images/icons/icon-72x72.png',
     vibrate: [200, 100, 200],
-    data: data.data,
+    data: {
+      url: '/'
+    },
     actions: [
       {
         action: 'view',
-        title: 'View Portfolio',
-        icon: '/img/icons/action-view.png'
+        title: 'Ver Promoción',
+        icon: '/images/icons/icon-72x72.png'
       },
       {
-        action: 'contact',
-        title: 'Get in Touch',
-        icon: '/img/icons/action-contact.png'
+        action: 'close',
+        title: 'Cerrar'
       }
     ]
   };
-
+  
   event.waitUntil(
-    self.registration.showNotification(data.title, options)
+    self.registration.showNotification('Restaurante Tasty', options)
   );
 });
 
-// Notification click handling
-self.addEventListener('notificationclick', (event) => {
+// Manejar clicks en notificaciones
+self.addEventListener('notificationclick', event => {
+  console.log('🔔 Notification clicked');
+  
   event.notification.close();
-
-  const action = event.action;
-  let url = '/';
-
-  if (action === 'view') {
-    url = '/';
-  } else if (action === 'contact') {
-    url = '/contact.html';
-  } else if (event.notification.data && event.notification.data.url) {
-    url = event.notification.data.url;
+  
+  if (event.action === 'view') {
+    event.waitUntil(
+      clients.openWindow(event.notification.data.url || '/')
+    );
   }
-
-  event.waitUntil(
-    clients.openWindow(url)
-  );
 });
 
-// Helper functions for analytics sync
-async function getStoredAnalytics() {
-  // Implementation would depend on your analytics storage strategy
-  return [];
+// Sincronización en background
+self.addEventListener('sync', event => {
+  console.log('🔄 Background sync triggered');
+  
+  if (event.tag === 'background-sync') {
+    event.waitUntil(doBackgroundSync());
+  }
+});
+
+async function doBackgroundSync() {
+  // Aquí puedes sincronizar datos cuando se recupere la conexión
+  console.log('🔄 Performing background sync...');
 }
 
-async function sendAnalyticsData(data) {
-  // Implementation would send data to analytics service
-  return Promise.resolve();
-}
-
-async function clearStoredAnalytics() {
-  // Implementation would clear stored analytics data
-  return Promise.resolve();
-}
+console.log('🚀 Service Worker loaded successfully');

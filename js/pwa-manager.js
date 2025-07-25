@@ -1,607 +1,602 @@
-/**
- * PWA Manager for Alex Rodriguez Videographer
- * Handles service worker registration, install prompts, and PWA features
- */
+/*
+PWA MANAGER - RESTAURANTE TASTY
+Maneja instalación, actualizaciones, notificaciones y funcionalidad offline
+*/
 
 class PWAManager {
     constructor() {
         this.deferredPrompt = null;
         this.isInstalled = false;
+        this.isOnline = navigator.onLine;
         this.swRegistration = null;
+        
         this.init();
     }
-
+    
     async init() {
-        this.checkInstallStatus();
-        this.registerServiceWorker();
+        console.log('📱 PWA Manager initialized');
+        
+        // Registrar Service Worker
+        await this.registerServiceWorker();
+        
+        // Configurar eventos de instalación
         this.setupInstallPrompt();
-        this.setupUpdateHandler();
-        this.setupOfflineHandler();
-        this.trackPWAUsage();
+        
+        // Configurar eventos de conectividad
+        this.setupConnectivityEvents();
+        
+        // Configurar notificaciones
+        this.setupNotifications();
+        
+        // Mostrar banner de instalación si es apropiado
+        this.checkInstallBanner();
+        
+        // Verificar actualizaciones
+        this.checkForUpdates();
     }
-
-    // Check if app is already installed
-    checkInstallStatus() {
-        // Check if running as PWA
-        this.isInstalled = window.matchMedia('(display-mode: standalone)').matches ||
-                          window.navigator.standalone ||
-                          document.referrer.includes('android-app://');
-
-        if (this.isInstalled) {
-            console.log('PWA is installed and running in standalone mode');
-            this.trackPWALaunch();
-        }
-    }
-
-    // Register service worker
+    
+    // Registrar Service Worker
     async registerServiceWorker() {
         if ('serviceWorker' in navigator) {
             try {
-                this.swRegistration = await navigator.serviceWorker.register('/sw.js', {
-                    scope: '/'
+                this.swRegistration = await navigator.serviceWorker.register('./sw.js', {
+                    scope: './'
                 });
-
-                console.log('Service Worker registered successfully:', this.swRegistration);
-
-                // Handle service worker updates
+                
+                console.log('✅ Service Worker registered:', this.swRegistration.scope);
+                
+                // Escuchar actualizaciones del SW
                 this.swRegistration.addEventListener('updatefound', () => {
+                    console.log('🔄 Service Worker update found');
                     this.handleServiceWorkerUpdate();
                 });
-
-                // Check for existing service worker
-                if (this.swRegistration.active) {
-                    console.log('Service Worker is active');
+                
+                // Verificar si hay un SW esperando
+                if (this.swRegistration.waiting) {
+                    this.showUpdateAvailable();
                 }
-
+                
             } catch (error) {
-                console.error('Service Worker registration failed:', error);
+                console.error('❌ Service Worker registration failed:', error);
             }
         } else {
-            console.log('Service Worker not supported');
+            console.warn('⚠️ Service Workers not supported');
         }
     }
-
-    // Setup install prompt handling
+    
+    // Configurar prompt de instalación
     setupInstallPrompt() {
-        console.log('🔧 Setting up install prompt handlers...');
-
-        // Check install criteria
-        this.checkInstallCriteria();
-
-        // Listen for beforeinstallprompt event
+        // Capturar el evento beforeinstallprompt
         window.addEventListener('beforeinstallprompt', (e) => {
-            console.log('🎯 beforeinstallprompt event fired!');
-            console.log('📱 Platforms:', e.platforms);
-
-            // Prevent the mini-infobar from appearing
+            console.log('📲 Install prompt available');
+            
+            // Prevenir el prompt automático
             e.preventDefault();
-
-            // Store the event for later use
+            
+            // Guardar el evento para usarlo después
             this.deferredPrompt = e;
-
-            // Show custom install button
-            this.showInstallButton();
-
-            // Log to debug panel
-            if (window.debugPanel) {
-                window.debugPanel.log('🎯 Install prompt available!');
-            }
+            
+            // Mostrar nuestro banner personalizado
+            this.showInstallBanner();
         });
-
-        // Listen for app installed event
+        
+        // Detectar cuando la app se instala
         window.addEventListener('appinstalled', () => {
-            console.log('✅ PWA was installed');
+            console.log('🎉 PWA installed successfully');
             this.isInstalled = true;
-            this.hideInstallButton();
-            this.trackPWAInstall();
-
-            if (window.debugPanel) {
-                window.debugPanel.log('✅ App installed successfully!');
-            }
+            this.hideInstallBanner();
+            this.showInstalledMessage();
+            
+            // Analytics
+            this.trackEvent('pwa_installed');
         });
-
-        // Timeout to check if prompt fired
-        setTimeout(() => {
-            if (!this.deferredPrompt) {
-                console.log('⚠️ Install prompt not available after 5 seconds');
-                this.diagnoseInstallIssues();
-            }
-        }, 5000);
     }
-
-    // Check PWA install criteria
-    checkInstallCriteria() {
-        const criteria = {
-            https: location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1',
-            manifest: document.querySelector('link[rel="manifest"]') !== null,
-            serviceWorker: 'serviceWorker' in navigator,
-            notInstalled: !this.isInstalled,
-            validManifest: this.checkManifestValidity()
-        };
-
-        console.log('🔍 PWA Install Criteria Check:');
-        Object.entries(criteria).forEach(([key, value]) => {
-            console.log(`${value ? '✅' : '❌'} ${key}:`, value);
-        });
-
-        return Object.values(criteria).every(Boolean);
-    }
-
-    // Check manifest validity
-    checkManifestValidity() {
-        const manifestLink = document.querySelector('link[rel="manifest"]');
-        if (!manifestLink) return false;
-
-        // Try to fetch and validate manifest
-        fetch(manifestLink.href)
-            .then(response => response.json())
-            .then(manifest => {
-                console.log('📋 Manifest loaded:', manifest);
-                const isValid = manifest.name && manifest.start_url && manifest.display && manifest.icons;
-                console.log('📋 Manifest valid:', isValid);
-                return isValid;
-            })
-            .catch(error => {
-                console.error('❌ Manifest error:', error);
-                return false;
-            });
-
-        return true; // Assume valid for now
-    }
-
-    // Diagnose why install prompt isn't showing
-    diagnoseInstallIssues() {
-        console.log('🔍 Diagnosing install issues...');
-
-        const issues = [];
-
-        // Check protocol
-        if (location.protocol !== 'https:' && !['localhost', '127.0.0.1'].includes(location.hostname)) {
-            issues.push('❌ Not served over HTTPS');
+    
+    // Mostrar banner de instalación personalizado
+    showInstallBanner() {
+        // Verificar si ya está instalado o si el banner ya existe
+        if (this.isInstalled || document.getElementById('pwa-install-banner')) {
+            return;
         }
-
-        // Check if already installed
-        if (this.isInstalled) {
-            issues.push('ℹ️ App already installed');
-        }
-
-        // Check manifest
-        if (!document.querySelector('link[rel="manifest"]')) {
-            issues.push('❌ No manifest link found');
-        }
-
-        // Check service worker
-        if (!('serviceWorker' in navigator)) {
-            issues.push('❌ Service Worker not supported');
-        } else if (!this.swRegistration) {
-            issues.push('❌ Service Worker not registered');
-        }
-
-        // Check browser
-        const isChrome = /Chrome/.test(navigator.userAgent) && !/Edg/.test(navigator.userAgent);
-        const isEdge = /Edg/.test(navigator.userAgent);
-        const isFirefox = /Firefox/.test(navigator.userAgent);
-
-        if (!isChrome && !isEdge && !isFirefox) {
-            issues.push('⚠️ Browser may not support install prompts');
-        }
-
-        // Check if file:// protocol
-        if (location.protocol === 'file:') {
-            issues.push('❌ File protocol - PWA requires HTTP server');
-        }
-
-        console.log('🔍 Install Issues Found:');
-        issues.forEach(issue => console.log(issue));
-
-        if (window.debugPanel) {
-            issues.forEach(issue => window.debugPanel.log(issue));
-        }
-
-        // Show manual install option if no major issues
-        if (issues.length === 0 || issues.every(issue => issue.includes('ℹ️'))) {
-            this.showManualInstallOption();
-        }
-    }
-
-    // Show manual install option
-    showManualInstallOption() {
-        console.log('📱 Showing manual install option...');
-
-        // Create manual install button
-        const button = this.createInstallButton();
-        button.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-            </svg>
-            Add to Home Screen
-        `;
-
-        button.addEventListener('click', () => {
-            this.showManualInstallInstructions();
-        });
-
-        document.body.appendChild(button);
-        button.style.display = 'block';
-    }
-
-    // Show manual install instructions
-    showManualInstallInstructions() {
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-        const isAndroid = /Android/.test(navigator.userAgent);
-
-        let instructions = '';
-
-        if (isIOS) {
-            instructions = `
-                <h3>📱 Install on iOS</h3>
-                <ol>
-                    <li>Tap the Share button <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></li>
-                    <li>Scroll down and tap "Add to Home Screen"</li>
-                    <li>Tap "Add" to confirm</li>
-                </ol>
-            `;
-        } else if (isAndroid) {
-            instructions = `
-                <h3>📱 Install on Android</h3>
-                <ol>
-                    <li>Tap the menu button (⋮)</li>
-                    <li>Tap "Add to Home screen" or "Install app"</li>
-                    <li>Tap "Add" to confirm</li>
-                </ol>
-            `;
-        } else {
-            instructions = `
-                <h3>💻 Install on Desktop</h3>
-                <ol>
-                    <li>Look for the install icon in the address bar</li>
-                    <li>Or go to browser menu → "Install Alex Rodriguez..."</li>
-                    <li>Click "Install" to confirm</li>
-                </ol>
-            `;
-        }
-
-        const modal = document.createElement('div');
-        modal.innerHTML = `
-            <div style="
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.8);
-                z-index: 10001;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 20px;
-            ">
-                <div style="
-                    background: white;
-                    padding: 30px;
-                    border-radius: 15px;
-                    max-width: 400px;
-                    width: 100%;
-                    text-align: center;
-                    font-family: 'Source Sans Pro', sans-serif;
-                ">
-                    ${instructions}
-                    <button onclick="this.parentElement.parentElement.remove()" style="
-                        background: #667eea;
-                        color: white;
-                        border: none;
-                        padding: 12px 24px;
-                        border-radius: 8px;
-                        cursor: pointer;
-                        font-size: 16px;
-                        margin-top: 20px;
-                    ">Got it!</button>
+        
+        const banner = document.createElement('div');
+        banner.id = 'pwa-install-banner';
+        banner.innerHTML = `
+            <div class="pwa-banner">
+                <div class="pwa-banner-content">
+                    <div class="pwa-banner-icon">
+                        <img src="images/icons/icon-144x144.png" alt="Restaurante Tasty">
+                    </div>
+                    <div class="pwa-banner-text">
+                        <h4>Instalar Restaurante Tasty</h4>
+                        <p>Acceso rápido, funciona offline y notificaciones de promociones</p>
+                    </div>
+                    <div class="pwa-banner-actions">
+                        <button class="pwa-install-btn" onclick="pwaManager.installApp()">
+                            Instalar
+                        </button>
+                        <button class="pwa-close-btn" onclick="pwaManager.hideInstallBanner()">
+                            ×
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
-
-        document.body.appendChild(modal);
-    }
-
-    // Show custom install button
-    showInstallButton() {
-        // Create install button if it doesn't exist
-        let installButton = document.getElementById('pwa-install-button');
         
-        if (!installButton) {
-            installButton = this.createInstallButton();
-            document.body.appendChild(installButton);
-        }
-
-        installButton.style.display = 'block';
-        
-        // Add click handler
-        installButton.addEventListener('click', () => {
-            this.promptInstall();
-        });
-    }
-
-    // Create install button element
-    createInstallButton() {
-        const button = document.createElement('button');
-        button.id = 'pwa-install-button';
-        button.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-            </svg>
-            Install App
+        // Agregar estilos
+        const style = document.createElement('style');
+        style.textContent = `
+            .pwa-banner {
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                right: 20px;
+                background: rgba(0, 0, 0, 0.95);
+                color: white;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                z-index: 10000;
+                backdrop-filter: blur(10px);
+                border: 2px solid rgba(234, 39, 45, 0.3);
+                animation: slideUp 0.5s ease;
+            }
+            
+            .pwa-banner-content {
+                display: flex;
+                align-items: center;
+                padding: 15px 20px;
+                gap: 15px;
+            }
+            
+            .pwa-banner-icon img {
+                width: 50px;
+                height: 50px;
+                border-radius: 10px;
+            }
+            
+            .pwa-banner-text {
+                flex: 1;
+            }
+            
+            .pwa-banner-text h4 {
+                margin: 0 0 5px 0;
+                font-size: 16px;
+                font-weight: 600;
+            }
+            
+            .pwa-banner-text p {
+                margin: 0;
+                font-size: 13px;
+                opacity: 0.8;
+            }
+            
+            .pwa-banner-actions {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+            
+            .pwa-install-btn {
+                background: #ea272d;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 25px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .pwa-install-btn:hover {
+                background: #c21e24;
+                transform: translateY(-2px);
+            }
+            
+            .pwa-close-btn {
+                background: transparent;
+                color: white;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                opacity: 0.7;
+                transition: opacity 0.3s ease;
+            }
+            
+            .pwa-close-btn:hover {
+                opacity: 1;
+            }
+            
+            @keyframes slideUp {
+                from {
+                    transform: translateY(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .pwa-banner {
+                    left: 10px;
+                    right: 10px;
+                    bottom: 10px;
+                }
+                
+                .pwa-banner-content {
+                    padding: 12px 15px;
+                    gap: 12px;
+                }
+                
+                .pwa-banner-icon img {
+                    width: 40px;
+                    height: 40px;
+                }
+                
+                .pwa-banner-text h4 {
+                    font-size: 14px;
+                }
+                
+                .pwa-banner-text p {
+                    font-size: 12px;
+                }
+                
+                .pwa-install-btn {
+                    padding: 8px 16px;
+                    font-size: 14px;
+                }
+            }
         `;
         
-        // Style the button
-        Object.assign(button.style, {
-            position: 'fixed',
-            bottom: '20px',
-            right: '20px',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            color: 'white',
-            border: 'none',
-            borderRadius: '25px',
-            padding: '12px 20px',
-            fontSize: '14px',
-            fontWeight: '600',
-            cursor: 'pointer',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
-            zIndex: '1000',
-            display: 'none',
-            alignItems: 'center',
-            gap: '8px',
-            transition: 'all 0.3s ease',
-            fontFamily: 'Source Sans Pro, sans-serif'
-        });
-
-        // Add hover effect
-        button.addEventListener('mouseenter', () => {
-            button.style.transform = 'translateY(-2px)';
-            button.style.boxShadow = '0 6px 25px rgba(0,0,0,0.4)';
-        });
-
-        button.addEventListener('mouseleave', () => {
-            button.style.transform = 'translateY(0)';
-            button.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
-        });
-
-        return button;
+        document.head.appendChild(style);
+        document.body.appendChild(banner);
+        
+        // Auto-ocultar después de 10 segundos
+        setTimeout(() => {
+            this.hideInstallBanner();
+        }, 10000);
     }
-
-    // Hide install button
-    hideInstallButton() {
-        const installButton = document.getElementById('pwa-install-button');
-        if (installButton) {
-            installButton.style.display = 'none';
-        }
-    }
-
-    // Prompt user to install
-    async promptInstall() {
+    
+    // Instalar la app
+    async installApp() {
         if (!this.deferredPrompt) {
-            console.log('Install prompt not available');
+            console.warn('⚠️ Install prompt not available');
             return;
         }
-
-        // Show the install prompt
-        this.deferredPrompt.prompt();
-
-        // Wait for user response
-        const { outcome } = await this.deferredPrompt.userChoice;
         
-        console.log(`Install prompt outcome: ${outcome}`);
-        
-        if (outcome === 'accepted') {
-            this.trackPWAInstallAccepted();
-        } else {
-            this.trackPWAInstallDismissed();
+        try {
+            // Mostrar el prompt de instalación
+            this.deferredPrompt.prompt();
+            
+            // Esperar la respuesta del usuario
+            const { outcome } = await this.deferredPrompt.userChoice;
+            
+            console.log(`📱 Install prompt result: ${outcome}`);
+            
+            if (outcome === 'accepted') {
+                this.trackEvent('pwa_install_accepted');
+            } else {
+                this.trackEvent('pwa_install_dismissed');
+            }
+            
+            // Limpiar el prompt
+            this.deferredPrompt = null;
+            this.hideInstallBanner();
+            
+        } catch (error) {
+            console.error('❌ Install failed:', error);
         }
-
-        // Clear the deferred prompt
-        this.deferredPrompt = null;
-        this.hideInstallButton();
     }
-
-    // Handle service worker updates
+    
+    // Ocultar banner de instalación
+    hideInstallBanner() {
+        const banner = document.getElementById('pwa-install-banner');
+        if (banner) {
+            banner.style.animation = 'slideDown 0.3s ease';
+            setTimeout(() => {
+                banner.remove();
+            }, 300);
+        }
+    }
+    
+    // Mostrar mensaje de instalación exitosa
+    showInstalledMessage() {
+        const message = document.createElement('div');
+        message.innerHTML = `
+            <div style="
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 10001;
+                animation: slideInRight 0.5s ease;
+            ">
+                <strong>🎉 ¡App instalada!</strong><br>
+                <small>Ahora puedes acceder desde tu escritorio</small>
+            </div>
+        `;
+        
+        document.body.appendChild(message);
+        
+        setTimeout(() => {
+            message.remove();
+        }, 5000);
+    }
+    
+    // Configurar eventos de conectividad
+    setupConnectivityEvents() {
+        window.addEventListener('online', () => {
+            console.log('🌐 Connection restored');
+            this.isOnline = true;
+            this.showConnectivityStatus('online');
+        });
+        
+        window.addEventListener('offline', () => {
+            console.log('📶 Connection lost');
+            this.isOnline = false;
+            this.showConnectivityStatus('offline');
+        });
+    }
+    
+    // Mostrar estado de conectividad
+    showConnectivityStatus(status) {
+        const existing = document.getElementById('connectivity-status');
+        if (existing) existing.remove();
+        
+        const statusDiv = document.createElement('div');
+        statusDiv.id = 'connectivity-status';
+        
+        if (status === 'offline') {
+            statusDiv.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    background: #dc3545;
+                    color: white;
+                    text-align: center;
+                    padding: 10px;
+                    z-index: 10002;
+                    font-weight: 600;
+                ">
+                    📶 Sin conexión - Funcionando en modo offline
+                </div>
+            `;
+        } else {
+            statusDiv.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    background: #28a745;
+                    color: white;
+                    text-align: center;
+                    padding: 10px;
+                    z-index: 10002;
+                    font-weight: 600;
+                    animation: slideDown 0.5s ease;
+                ">
+                    🌐 Conexión restaurada
+                </div>
+            `;
+            
+            setTimeout(() => {
+                statusDiv.remove();
+            }, 3000);
+        }
+        
+        document.body.appendChild(statusDiv);
+    }
+    
+    // Configurar notificaciones push
+    async setupNotifications() {
+        if ('Notification' in window && 'serviceWorker' in navigator) {
+            // Verificar permisos
+            let permission = Notification.permission;
+            
+            if (permission === 'default') {
+                // Mostrar prompt de notificaciones después de un tiempo
+                setTimeout(() => {
+                    this.requestNotificationPermission();
+                }, 30000); // 30 segundos después de cargar
+            }
+        }
+    }
+    
+    // Solicitar permisos de notificación
+    async requestNotificationPermission() {
+        try {
+            const permission = await Notification.requestPermission();
+            
+            if (permission === 'granted') {
+                console.log('✅ Notification permission granted');
+                this.trackEvent('notifications_enabled');
+                
+                // Suscribirse a push notifications
+                await this.subscribeToPush();
+                
+                // Mostrar notificación de bienvenida
+                this.showWelcomeNotification();
+            } else {
+                console.log('❌ Notification permission denied');
+                this.trackEvent('notifications_denied');
+            }
+        } catch (error) {
+            console.error('❌ Notification permission error:', error);
+        }
+    }
+    
+    // Suscribirse a notificaciones push
+    async subscribeToPush() {
+        if (!this.swRegistration) return;
+        
+        try {
+            const subscription = await this.swRegistration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: this.urlBase64ToUint8Array('YOUR_VAPID_PUBLIC_KEY') // Reemplazar con tu clave VAPID
+            });
+            
+            console.log('📬 Push subscription successful');
+            
+            // Enviar suscripción al servidor
+            // await this.sendSubscriptionToServer(subscription);
+            
+        } catch (error) {
+            console.error('❌ Push subscription failed:', error);
+        }
+    }
+    
+    // Mostrar notificación de bienvenida
+    showWelcomeNotification() {
+        if (Notification.permission === 'granted') {
+            new Notification('¡Bienvenido a Restaurante Tasty!', {
+                body: 'Recibirás notificaciones sobre promociones especiales y eventos.',
+                icon: 'images/icons/icon-192x192.png',
+                badge: 'images/icons/icon-144x144.png'
+            });
+        }
+    }
+    
+    // Verificar actualizaciones
+    checkForUpdates() {
+        if (this.swRegistration) {
+            this.swRegistration.update();
+        }
+    }
+    
+    // Manejar actualizaciones del Service Worker
     handleServiceWorkerUpdate() {
         const newWorker = this.swRegistration.installing;
         
         newWorker.addEventListener('statechange', () => {
             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                // New service worker is available
-                this.showUpdateNotification();
+                this.showUpdateAvailable();
             }
         });
     }
-
-    // Show update notification
-    showUpdateNotification() {
-        // Create update notification
-        const notification = document.createElement('div');
-        notification.id = 'pwa-update-notification';
-        notification.innerHTML = `
+    
+    // Mostrar notificación de actualización disponible
+    showUpdateAvailable() {
+        const updateBanner = document.createElement('div');
+        updateBanner.innerHTML = `
             <div style="
                 position: fixed;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: #333;
+                bottom: 20px;
+                left: 20px;
+                right: 20px;
+                background: #007bff;
                 color: white;
                 padding: 15px 20px;
                 border-radius: 10px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-                z-index: 1001;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 10003;
                 display: flex;
                 align-items: center;
-                gap: 15px;
-                font-family: 'Source Sans Pro', sans-serif;
-                font-size: 14px;
+                justify-content: space-between;
             ">
-                <span>New version available!</span>
-                <button onclick="window.pwaManager.applyUpdate()" style="
-                    background: #667eea;
-                    color: white;
+                <div>
+                    <strong>🔄 Actualización disponible</strong><br>
+                    <small>Nueva versión de la app lista para instalar</small>
+                </div>
+                <button onclick="pwaManager.applyUpdate()" style="
+                    background: white;
+                    color: #007bff;
                     border: none;
                     padding: 8px 16px;
                     border-radius: 5px;
-                    cursor: pointer;
-                    font-size: 12px;
                     font-weight: 600;
-                ">Update</button>
-                <button onclick="this.parentElement.parentElement.remove()" style="
-                    background: transparent;
-                    color: white;
-                    border: 1px solid #666;
-                    padding: 8px 16px;
-                    border-radius: 5px;
                     cursor: pointer;
-                    font-size: 12px;
-                ">Later</button>
+                ">
+                    Actualizar
+                </button>
             </div>
         `;
         
-        document.body.appendChild(notification);
-        
-        // Auto-hide after 10 seconds
-        setTimeout(() => {
-            if (notification.parentElement) {
-                notification.remove();
-            }
-        }, 10000);
+        document.body.appendChild(updateBanner);
     }
-
-    // Apply service worker update
+    
+    // Aplicar actualización
     applyUpdate() {
         if (this.swRegistration && this.swRegistration.waiting) {
             this.swRegistration.waiting.postMessage({ type: 'SKIP_WAITING' });
             window.location.reload();
         }
     }
-
-    // Setup offline handler
-    setupOfflineHandler() {
-        window.addEventListener('online', () => {
-            console.log('Back online');
-            this.hideOfflineNotification();
-        });
-
-        window.addEventListener('offline', () => {
-            console.log('Gone offline');
-            this.showOfflineNotification();
-        });
-    }
-
-    // Show offline notification
-    showOfflineNotification() {
-        const notification = document.createElement('div');
-        notification.id = 'offline-notification';
-        notification.innerHTML = `
-            <div style="
-                position: fixed;
-                bottom: 20px;
-                left: 20px;
-                background: #ff6b6b;
-                color: white;
-                padding: 12px 20px;
-                border-radius: 8px;
-                font-family: 'Source Sans Pro', sans-serif;
-                font-size: 14px;
-                z-index: 1001;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            ">
-                📡 You're offline - Some features may be limited
-            </div>
-        `;
+    
+    // Verificar si debe mostrar banner de instalación
+    checkInstallBanner() {
+        // No mostrar si ya está instalado o es iOS Safari
+        if (this.isInstalled || this.isIOSSafari()) {
+            return;
+        }
         
-        document.body.appendChild(notification);
-    }
-
-    // Hide offline notification
-    hideOfflineNotification() {
-        const notification = document.getElementById('offline-notification');
-        if (notification) {
-            notification.remove();
+        // Mostrar después de 5 segundos si no se ha mostrado antes
+        const hasSeenBanner = localStorage.getItem('pwa-banner-seen');
+        if (!hasSeenBanner) {
+            setTimeout(() => {
+                if (this.deferredPrompt) {
+                    this.showInstallBanner();
+                    localStorage.setItem('pwa-banner-seen', 'true');
+                }
+            }, 5000);
         }
     }
-
-    // Setup update handler for service worker messages
-    setupUpdateHandler() {
-        navigator.serviceWorker.addEventListener('message', (event) => {
-            if (event.data && event.data.type === 'UPDATE_AVAILABLE') {
-                this.showUpdateNotification();
-            }
-        });
+    
+    // Detectar iOS Safari
+    isIOSSafari() {
+        const ua = window.navigator.userAgent;
+        const iOS = !!ua.match(/iPad|iPhone|iPod/);
+        const webkit = !!ua.match(/WebKit/);
+        return iOS && webkit && !ua.match(/CriOS/);
     }
-
-    // Analytics tracking for PWA events
-    trackPWAUsage() {
-        if (this.isInstalled && window.analyticsTracker) {
-            window.analyticsTracker.trackPWAUsage('launch');
+    
+    // Convertir VAPID key
+    urlBase64ToUint8Array(base64String) {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+            .replace(/-/g, '+')
+            .replace(/_/g, '/');
+        
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+        
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
         }
+        return outputArray;
     }
-
-    trackPWALaunch() {
-        if (window.gtag) {
-            gtag('event', 'pwa_launch', {
-                event_category: 'PWA',
-                event_label: 'App launched in standalone mode'
+    
+    // Tracking de eventos
+    trackEvent(eventName, data = {}) {
+        console.log(`📊 PWA Event: ${eventName}`, data);
+        
+        // Integrar con Google Analytics si está disponible
+        if (typeof gtag !== 'undefined') {
+            gtag('event', eventName, {
+                event_category: 'pwa',
+                ...data
             });
-        }
-    }
-
-    trackPWAInstall() {
-        if (window.gtag) {
-            gtag('event', 'pwa_install', {
-                event_category: 'PWA',
-                event_label: 'App installed',
-                value: 1
-            });
-        }
-    }
-
-    trackPWAInstallAccepted() {
-        if (window.gtag) {
-            gtag('event', 'pwa_install_prompt', {
-                event_category: 'PWA',
-                event_label: 'Install prompt accepted'
-            });
-        }
-    }
-
-    trackPWAInstallDismissed() {
-        if (window.gtag) {
-            gtag('event', 'pwa_install_prompt', {
-                event_category: 'PWA',
-                event_label: 'Install prompt dismissed'
-            });
-        }
-    }
-
-    // Public methods
-    getInstallStatus() {
-        return {
-            isInstalled: this.isInstalled,
-            canInstall: !!this.deferredPrompt,
-            isServiceWorkerSupported: 'serviceWorker' in navigator
-        };
-    }
-
-    forceInstallPrompt() {
-        if (this.deferredPrompt) {
-            this.promptInstall();
-        } else {
-            console.log('Install prompt not available');
         }
     }
 }
 
-// Initialize PWA Manager when DOM is ready
+// Inicializar PWA Manager
+let pwaManager;
+
 document.addEventListener('DOMContentLoaded', () => {
-    window.pwaManager = new PWAManager();
-    console.log('PWA Manager initialized');
+    pwaManager = new PWAManager();
 });
 
-// Export for external use
-window.getPWAStatus = () => {
-    return window.pwaManager ? window.pwaManager.getInstallStatus() : null;
-};
+// Exportar para uso global
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = PWAManager;
+} else {
+    window.PWAManager = PWAManager;
+}
