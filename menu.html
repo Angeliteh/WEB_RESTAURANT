@@ -35,19 +35,7 @@
 	<!-- Canonical URL -->
 	<link rel="canonical" href="https://restaurantetasty.com/menu.html">
 
-	<!-- 
-	//////////////////////////////////////////////////////
 
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FreeHTML5.co
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
-
-	//////////////////////////////////////////////////////
-	 -->
 
   	<!-- Facebook and Twitter integration -->
 	<meta property="og:title" content=""/>
@@ -306,7 +294,7 @@
 		.floating-cart {
 			position: fixed;
 			bottom: 30px;
-			right: 30px;
+			right: 120px; /* Movido hacia la izquierda para evitar WhatsApp */
 			background: #ea272d;
 			color: white;
 			border: 2px solid rgba(255, 255, 255, 0.2);
@@ -322,11 +310,41 @@
 			font-family: "Cormorant Garamond", Georgia, serif;
 			animation: pulse 2s infinite;
 		}
+
+		/* Posición específica para móvil - evitar solapamiento con WhatsApp */
+		@media (max-width: 768px) {
+			.floating-cart {
+				bottom: 100px; /* Más arriba para evitar WhatsApp */
+				right: 20px;
+				left: auto;
+				padding: 12px 16px;
+				font-size: 14px;
+				border-radius: 40px;
+			}
+		}
+
+		/* Para pantallas muy pequeñas, mover a la izquierda */
+		@media (max-width: 480px) {
+			.floating-cart {
+				bottom: 30px;
+				right: auto;
+				left: 20px; /* A la izquierda para evitar WhatsApp */
+				padding: 10px 14px;
+				font-size: 13px;
+			}
+		}
 		.floating-cart:hover {
 			background: #d41e24;
 			transform: translateY(-3px) scale(1.05);
 			box-shadow: 0 8px 30px rgba(234, 39, 45, 0.8);
 			border-color: rgba(255, 255, 255, 0.4);
+		}
+
+		/* Hover específico para móvil */
+		@media (max-width: 768px) {
+			.floating-cart:hover {
+				transform: translateY(-2px) scale(1.03);
+			}
 		}
 		.floating-cart.show {
 			display: block;
@@ -337,6 +355,24 @@
 			50% { box-shadow: 0 6px 25px rgba(234, 39, 45, 0.8); }
 			100% { box-shadow: 0 6px 25px rgba(234, 39, 45, 0.6); }
 		}
+
+		/* Animación específica para móvil cuando está a la izquierda */
+		@media (max-width: 480px) {
+			@keyframes pulse {
+				0% {
+					box-shadow: 0 4px 20px rgba(234, 39, 45, 0.6);
+					transform: scale(1);
+				}
+				50% {
+					box-shadow: 0 6px 25px rgba(234, 39, 45, 0.8);
+					transform: scale(1.02);
+				}
+				100% {
+					box-shadow: 0 4px 20px rgba(234, 39, 45, 0.6);
+					transform: scale(1);
+				}
+			}
+		}
 		.cart-count {
 			background: #ff6b6b;
 			color: white;
@@ -346,6 +382,27 @@
 			margin-left: 8px;
 			min-width: 20px;
 			text-align: center;
+			font-weight: 700;
+			box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
+		}
+
+		/* Contador específico para móvil */
+		@media (max-width: 768px) {
+			.cart-count {
+				padding: 1px 6px;
+				font-size: 11px;
+				min-width: 18px;
+				margin-left: 6px;
+			}
+		}
+
+		@media (max-width: 480px) {
+			.cart-count {
+				padding: 1px 5px;
+				font-size: 10px;
+				min-width: 16px;
+				margin-left: 5px;
+			}
 		}
 
 		/* Panel del Carrito */
@@ -1072,9 +1129,25 @@
 		<div class="container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Book a Table</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae enim quae vitae cupiditate, sequi quam ea id dolor reiciendis consectetur repudiandae. Rem quam, repellendus veniam ipsa fuga maxime odio? Eaque!</p>
-					<p><a href="reservation.html" class="btn btn-primary btn-outline">Book Now</a></p>
+					<h2 data-translate="pages.menu.reservation.title">Reserva Tu Mesa</h2>
+					<p data-translate="pages.menu.reservation.description">¿Te gustó nuestro menú? Reserva tu mesa ahora y disfruta de una experiencia gastronómica única. Nuestro equipo de chefs está listo para sorprenderte con sabores excepcionales en un ambiente elegante y acogedor.</p>
+					<p data-translate="pages.menu.reservation.special" style="color: #f8d7da; font-weight: 500; margin: 20px 0;">
+						✨ <strong>Oferta especial:</strong> Reserva para 4 personas o más y recibe un aperitivo de cortesía
+					</p>
+					<div style="margin-top: 30px;">
+						<a href="reservation.html" class="btn btn-primary btn-outline" data-translate="pages.menu.reservation.button" style="margin-right: 15px;">
+							<i class="icon-calendar" style="margin-right: 8px;"></i>Reservar Ahora
+						</a>
+						<a href="tel:+525555550123" class="btn btn-outline" data-translate="pages.menu.reservation.call">
+							<i class="icon-phone" style="margin-right: 8px;"></i>Llamar
+						</a>
+					</div>
+					<div style="margin-top: 25px; font-size: 14px; opacity: 0.9;">
+						<p data-translate="pages.menu.reservation.hours">
+							<i class="icon-clock" style="margin-right: 5px;"></i>
+							<strong>Horarios:</strong> Lun-Dom 12:00-23:00 | <strong>Cocina:</strong> Hasta 22:30
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -1178,6 +1251,16 @@
 			<h3 data-translate="cart.title">Mi Pedido</h3>
 			<button class="cart-close" id="cartClose">×</button>
 		</div>
+		<div class="cart-currency-info" id="cartCurrencyInfo" style="
+			background: #f8f9fa;
+			padding: 8px 15px;
+			font-size: 12px;
+			color: #666;
+			border-bottom: 1px solid #eee;
+			display: none;
+		">
+			💱 <span id="cartCurrencyText">Precios en MXN</span>
+		</div>
 		<div class="cart-items" id="cartItems">
 			<div style="text-align: center; padding: 40px; color: #666;">
 				<p data-translate="cart.empty">Tu pedido está vacío</p>
@@ -1199,7 +1282,21 @@
 			// Variables globales
 			let cart = [];
 			let currentLanguage = localStorage.getItem('selectedLanguage') || 'es';
-			const exchangeRate = 20.5; // 1 USD = 20.5 MXN (puedes actualizar esto)
+			let cartCurrency = currentLanguage === 'es' ? 'MXN' : 'USD'; // Moneda fija del carrito
+
+			// Esperar a que el Currency Manager esté listo
+			setTimeout(() => {
+				if (window.currencyManager) {
+					// Agregar indicador de moneda
+					window.currencyManager.addCurrencyIndicator();
+
+					// Actualizar precios iniciales
+					window.currencyManager.updateAllPrices();
+
+					// Sincronizar moneda del carrito con Currency Manager
+					cartCurrency = window.currencyManager.currentCurrency;
+				}
+			}, 100);
 
 			// Elementos del DOM
 			const filterButtons = document.querySelectorAll('.filter-btn');
@@ -1214,33 +1311,41 @@
 			const cartTotal = document.getElementById('cartTotal');
 			const cartClear = document.getElementById('cartClear');
 
-			// Función para convertir precios
-			function convertPrice(usdPrice, targetCurrency) {
-				if (targetCurrency === 'MXN') {
-					return (usdPrice * exchangeRate).toFixed(2);
+			// Funciones de conversión para el carrito
+			function convertPriceForCart(usdPrice) {
+				// Siempre convertir a la moneda actual del carrito
+				if (window.currencyManager) {
+					return window.currencyManager.convertPrice(usdPrice, cartCurrency);
 				}
-				return usdPrice.toFixed(2);
+				// Fallback si no está disponible
+				const rate = 20.15;
+				return cartCurrency === 'MXN' ? (usdPrice * rate) : usdPrice;
 			}
 
-			// Función para formatear precio
-			function formatPrice(price, currency) {
-				if (currency === 'MXN') {
-					return `$${price} MXN`;
+			// Función para formatear precio del carrito
+			function formatCartPrice(price) {
+				if (window.currencyManager) {
+					return window.currencyManager.formatPrice(price, cartCurrency, true);
 				}
-				return `$${price} USD`;
+				// Fallback
+				return `$${parseFloat(price).toFixed(2)} ${cartCurrency}`;
 			}
 
-			// Función para actualizar precios en la página
+			// Función para obtener precio base en USD desde el DOM
+			function getItemBasePrice(itemElement) {
+				const priceUSD = parseFloat(itemElement.dataset.price);
+				if (isNaN(priceUSD)) {
+					console.error('Invalid price found:', itemElement.dataset.price);
+					return 0;
+				}
+				return priceUSD;
+			}
+
+			// Función para actualizar precios (delegada al Currency Manager)
 			function updatePrices() {
-				const currency = currentLanguage === 'es' ? 'MXN' : 'USD';
-				document.querySelectorAll('[data-price-usd]').forEach(element => {
-					const usdPrice = parseFloat(element.dataset.priceUsd);
-					const convertedPrice = convertPrice(usdPrice, currency);
-					const formattedPrice = currency === 'MXN' ?
-						`$${Math.floor(convertedPrice)}<sup>.${(convertedPrice % 1).toFixed(2).slice(2)}</sup>` :
-						`$${Math.floor(usdPrice)}<sup>.${(usdPrice % 1).toFixed(2).slice(2)}</sup>`;
-					element.innerHTML = formattedPrice;
-				});
+				if (window.currencyManager) {
+					window.currencyManager.updateAllPrices();
+				}
 			}
 
 			// Función para mostrar/ocultar categorías en vista desktop
@@ -1275,16 +1380,34 @@
 
 			// Función para agregar al carrito
 			function addToCart(item) {
+				// Convertir precio a la moneda del carrito
+				const convertedPrice = convertPriceForCart(item.priceUSD);
+
 				const existingItem = cart.find(cartItem => cartItem.id === item.id);
 
 				if (existingItem) {
 					existingItem.quantity += 1;
 				} else {
-					cart.push({...item, quantity: 1});
+					// Guardar tanto el precio original en USD como el convertido
+					cart.push({
+						...item,
+						quantity: 1,
+						priceUSD: item.priceUSD, // Precio original en USD
+						convertedPrice: convertedPrice, // Precio convertido a la moneda del carrito
+						currency: cartCurrency // Moneda en la que se agregó
+					});
 				}
 
 				updateCartDisplay();
 				showCartButton();
+
+				// Log para debugging
+				console.log('Item added to cart:', {
+					name: item.name,
+					priceUSD: item.priceUSD,
+					convertedPrice: convertedPrice,
+					currency: cartCurrency
+				});
 			}
 
 			// Función para remover del carrito
@@ -1315,6 +1438,30 @@
 				floatingCart.classList.remove('show');
 			}
 
+			// Función para actualizar información de moneda del carrito
+			function updateCartCurrencyInfo() {
+				const currencyInfoDiv = document.getElementById('cartCurrencyInfo');
+				const currencyText = document.getElementById('cartCurrencyText');
+
+				if (cart.length > 0) {
+					const currencyInfo = window.currencyManager ?
+						window.currencyManager.getCurrentCurrencyInfo() :
+						{ currency: cartCurrency, exchangeRate: 20.15 };
+
+					currencyInfoDiv.style.display = 'block';
+
+					if (cartCurrency === 'MXN' && currencyInfo.exchangeRate) {
+						currencyText.textContent = `Precios en ${cartCurrency} (Tipo de cambio: $1 USD = $${currencyInfo.exchangeRate.toFixed(2)} MXN)`;
+					} else if (cartCurrency === 'USD') {
+						currencyText.textContent = `Precios en ${cartCurrency} (Moneda original del menú)`;
+					} else {
+						currencyText.textContent = `Precios en ${cartCurrency}`;
+					}
+				} else {
+					currencyInfoDiv.style.display = 'none';
+				}
+			}
+
 			// Función para abrir carrito
 			function openCart() {
 				cartPanel.classList.add('open');
@@ -1331,8 +1478,6 @@
 
 			// Función para actualizar display del carrito
 			function updateCartDisplay() {
-				const currency = currentLanguage === 'es' ? 'MXN' : 'USD';
-
 				// Actualizar contador
 				const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 				cartCount.textContent = totalItems;
@@ -1347,13 +1492,14 @@
 					`;
 				} else {
 					cartItems.innerHTML = cart.map(item => {
-						const price = convertPrice(item.price, currency);
+						// Los precios ya están convertidos cuando se agregan al carrito
+						const itemTotal = item.convertedPrice * item.quantity;
 						return `
 							<div class="cart-item">
 								<img src="${item.image}" alt="${item.name}">
 								<div class="cart-item-info">
 									<div class="cart-item-name">${item.name}</div>
-									<div class="cart-item-price">${formatPrice(price, currency)} x ${item.quantity}</div>
+									<div class="cart-item-price">${formatCartPrice(item.convertedPrice)} x ${item.quantity} = ${formatCartPrice(itemTotal)}</div>
 								</div>
 								<button class="cart-item-remove" onclick="removeFromCart('${item.id}')">×</button>
 							</div>
@@ -1363,11 +1509,13 @@
 
 				// Actualizar total
 				const total = cart.reduce((sum, item) => {
-					const price = convertPrice(item.price, currency);
-					return sum + (parseFloat(price) * item.quantity);
+					return sum + (item.convertedPrice * item.quantity);
 				}, 0);
 
-				cartTotal.textContent = formatPrice(total.toFixed(2), currency);
+				cartTotal.textContent = formatCartPrice(total);
+
+				// Mostrar información de moneda
+				updateCartCurrencyInfo();
 			}
 
 			// Event listeners para los filtros
@@ -1412,10 +1560,17 @@
 
 					// Obtener información del item
 					const itemElement = this.closest('.menu-item-list, .menu-item-card');
+					const priceUSD = getItemBasePrice(itemElement);
+
+					if (priceUSD === 0) {
+						console.error('Cannot add item with invalid price');
+						return;
+					}
+
 					const item = {
 						id: itemElement.dataset.item,
 						name: itemElement.querySelector('.menu-item-title, .menu-card-title').textContent,
-						price: parseFloat(itemElement.dataset.price),
+						priceUSD: priceUSD, // Precio base en USD
 						image: itemElement.dataset.image || itemElement.querySelector('img').src
 					};
 
@@ -1436,8 +1591,35 @@
 			// Escuchar cambios de idioma
 			document.addEventListener('languageChanged', function(e) {
 				currentLanguage = e.detail.language;
+
+				// Actualizar moneda del carrito y reconvertir precios
+				const newCurrency = currentLanguage === 'es' ? 'MXN' : 'USD';
+				if (newCurrency !== cartCurrency) {
+					cartCurrency = newCurrency;
+
+					// Reconvertir todos los items del carrito a la nueva moneda
+					cart.forEach(item => {
+						item.convertedPrice = convertPriceForCart(item.priceUSD);
+						item.currency = cartCurrency;
+					});
+
+					console.log(`Cart currency changed to: ${cartCurrency}`);
+				}
+
 				updatePrices();
 				updateCartDisplay();
+			});
+
+			// Escuchar actualizaciones de precios del Currency Manager
+			document.addEventListener('pricesUpdated', function(e) {
+				// Reconvertir precios del carrito con el nuevo tipo de cambio
+				cart.forEach(item => {
+					item.convertedPrice = convertPriceForCart(item.priceUSD);
+				});
+
+				updateCartDisplay();
+
+				console.log('Cart prices updated with new exchange rate:', e.detail.exchangeRate);
 			});
 
 			// Inicializar
@@ -1455,6 +1637,9 @@
 
 	<!-- WhatsApp Integration -->
 	<script src="js/whatsapp-integration.js"></script>
+
+	<!-- Currency Manager -->
+	<script src="js/currency-manager.js"></script>
 
 	<!-- Sistema de Datos Centralizados -->
 	<script src="js/data-system-init.js"></script>

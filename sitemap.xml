@@ -104,8 +104,44 @@
         <image:image>
             <image:loc>https://restaurantetasty.com/images/gallery_1.jpeg</image:loc>
             <image:title>Contacto - Ubicación Restaurante Tasty</image:title>
-            <image:caption>Visítanos en Av. Reforma 123, Ciudad de México</image:caption>
+            <image:caption>Visítanos en Av. Reforma 1847, Ciudad de México</image:caption>
         </image:image>
     </url>
-    
+
+    <!-- Página Acerca de Nosotros -->
+    <url>
+        <loc>https://restaurantetasty.com/about.html</loc>
+        <lastmod>2024-12-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://restaurantetasty.com/images/hero_1.jpeg</image:loc>
+            <image:title>Historia - Restaurante Tasty</image:title>
+            <image:caption>Tradición familiar desde 1995 en Ciudad de México</image:caption>
+        </image:image>
+    </url>
+
+    <!-- Páginas Legales -->
+    <url>
+        <loc>https://restaurantetasty.com/privacy-policy.html</loc>
+        <lastmod>2024-12-23</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://restaurantetasty.com/terms-conditions.html</loc>
+        <lastmod>2024-12-23</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <!-- Archivos PWA -->
+    <url>
+        <loc>https://restaurantetasty.com/manifest.json</loc>
+        <lastmod>2024-12-23</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
 </urlset>

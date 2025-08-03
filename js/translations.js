@@ -139,7 +139,9 @@ const translations = {
             total: "Total:",
             clear: "Limpiar Pedido",
             remove: "Quitar",
-            currency: "MXN"
+            currency: "MXN",
+            currencyNote: "Precios en pesos mexicanos",
+            exchangeInfo: "Tipo de cambio actualizado diariamente"
         },
         
         // Testimonials Section
@@ -226,6 +228,14 @@ const translations = {
                     desserts: "Postres",
                     drinks: "Bebidas",
                     specials: "Especiales del Chef"
+                },
+                reservation: {
+                    title: "Reserva Tu Mesa",
+                    description: "¿Te gustó nuestro menú? Reserva tu mesa ahora y disfruta de una experiencia gastronómica única. Nuestro equipo de chefs está listo para sorprenderte con sabores excepcionales en un ambiente elegante y acogedor.",
+                    special: "✨ Oferta especial: Reserva para 4 personas o más y recibe un aperitivo de cortesía",
+                    button: "Reservar Ahora",
+                    call: "Llamar",
+                    hours: "Horarios: Lun-Dom 12:00-23:00 | Cocina: Hasta 22:30"
                 },
                 badges: {
                     bestseller: "⭐ Más Vendido",
@@ -570,6 +580,14 @@ const translations = {
                 gallery: "Galería",
                 contact: "Contacto"
             },
+            services: {
+                title: "Servicios",
+                dining: "Cenas Privadas",
+                events: "Eventos Corporativos",
+                catering: "Catering",
+                delivery: "Delivery",
+                reservations: "Reservaciones"
+            },
             contact: {
                 title: "Contáctanos",
                 address: "Av. Reforma 1847, Col. Lomas de Chapultepec, CDMX 11000",
@@ -721,7 +739,9 @@ const translations = {
             total: "Total:",
             clear: "Clear Order",
             remove: "Remove",
-            currency: "USD"
+            currency: "USD",
+            currencyNote: "Prices in US dollars",
+            exchangeInfo: "Exchange rate updated daily"
         },
 
         // Testimonials Section
@@ -808,6 +828,14 @@ const translations = {
                     desserts: "Desserts",
                     drinks: "Drinks",
                     specials: "Chef's Specials"
+                },
+                reservation: {
+                    title: "Book Your Table",
+                    description: "Did you like our menu? Book your table now and enjoy a unique gastronomic experience. Our team of chefs is ready to surprise you with exceptional flavors in an elegant and welcoming atmosphere.",
+                    special: "✨ Special offer: Book for 4 people or more and receive a complimentary appetizer",
+                    button: "Book Now",
+                    call: "Call",
+                    hours: "Hours: Mon-Sun 12:00-23:00 | Kitchen: Until 22:30"
                 },
                 badges: {
                     bestseller: "⭐ Bestseller",
@@ -1151,6 +1179,14 @@ const translations = {
                 services: "Services",
                 gallery: "Gallery",
                 contact: "Contact"
+            },
+            services: {
+                title: "Services",
+                dining: "Private Dining",
+                events: "Corporate Events",
+                catering: "Catering",
+                delivery: "Delivery",
+                reservations: "Reservations"
             },
             contact: {
                 title: "Contact Us",

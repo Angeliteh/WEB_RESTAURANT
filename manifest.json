@@ -11,29 +11,6 @@
   "lang": "es-MX",
   "dir": "ltr",
   "categories": ["food", "restaurant", "lifestyle", "business"],
-  "screenshots": [
-    {
-      "src": "/images/pwa/screenshot-mobile-1.png",
-      "sizes": "390x844",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Página principal en móvil"
-    },
-    {
-      "src": "/images/pwa/screenshot-mobile-2.png", 
-      "sizes": "390x844",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Menú gourmet en móvil"
-    },
-    {
-      "src": "/images/pwa/screenshot-desktop-1.png",
-      "sizes": "1280x720",
-      "type": "image/png", 
-      "form_factor": "wide",
-      "label": "Página principal en escritorio"
-    }
-  ],
   "icons": [
     {
       "src": "images/icons/favicon-16x16.png",

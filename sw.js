@@ -3,9 +3,9 @@ SERVICE WORKER - RESTAURANTE TASTY PWA
 Maneja caché, offline, notificaciones y actualizaciones automáticas
 */
 
-const CACHE_NAME = 'restaurante-tasty-v1.2';
-const STATIC_CACHE = 'static-v1.2';
-const DYNAMIC_CACHE = 'dynamic-v1.2';
+const CACHE_NAME = 'restaurante-tasty-v1.4';
+const STATIC_CACHE = 'static-v1.4';
+const DYNAMIC_CACHE = 'dynamic-v1.4';
 
 // Recursos críticos que se cachean inmediatamente
 const STATIC_ASSETS = [
@@ -15,6 +15,11 @@ const STATIC_ASSETS = [
   './gallery.html',
   './reservation.html',
   './contact.html',
+  './about.html',
+  './privacy-policy.html',
+  './terms-conditions.html',
+  './404.html',
+  './offline.html',
   './manifest.json',
 
   // CSS
@@ -28,6 +33,7 @@ const STATIC_ASSETS = [
 
   // JavaScript
   './js/jquery.min.js',
+  './js/jquery.easing.1.3.js',
   './js/bootstrap.min.js',
   './js/jquery.waypoints.min.js',
   './js/jquery.stellar.min.js',
@@ -38,6 +44,10 @@ const STATIC_ASSETS = [
   './js/seo-manager.js',
   './js/reservation-system.js',
   './js/gallery-premium.js',
+  './js/google-analytics.js',
+  './js/cookie-consent.js',
+  './js/pwa-manager.js',
+  './js/currency-manager.js',
 
   // Imágenes críticas
   './images/gallery_1.jpeg',

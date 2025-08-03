@@ -27,10 +27,7 @@ class PWAManager {
         
         // Configurar notificaciones
         this.setupNotifications();
-        
-        // Mostrar banner de instalación si es apropiado
-        this.checkInstallBanner();
-        
+
         // Verificar actualizaciones
         this.checkForUpdates();
     }
@@ -69,15 +66,15 @@ class PWAManager {
         // Capturar el evento beforeinstallprompt
         window.addEventListener('beforeinstallprompt', (e) => {
             console.log('📲 Install prompt available');
-            
+
             // Prevenir el prompt automático
             e.preventDefault();
-            
+
             // Guardar el evento para usarlo después
             this.deferredPrompt = e;
-            
-            // Mostrar nuestro banner personalizado
-            this.showInstallBanner();
+
+            // Verificar si debe mostrar el banner (solo en móviles)
+            this.checkInstallBanner();
         });
         
         // Detectar cuando la app se instala
@@ -130,80 +127,103 @@ class PWAManager {
                 position: fixed;
                 bottom: 20px;
                 left: 20px;
-                right: 20px;
-                background: rgba(0, 0, 0, 0.95);
-                color: white;
-                border-radius: 15px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-                z-index: 10000;
+                max-width: 350px;
+                background: rgba(255, 255, 255, 0.98);
+                color: #333;
+                border-radius: 12px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+                z-index: 9999;
                 backdrop-filter: blur(10px);
-                border: 2px solid rgba(234, 39, 45, 0.3);
-                animation: slideUp 0.5s ease;
+                border: 1px solid rgba(234, 39, 45, 0.2);
+                animation: slideUp 0.4s ease;
             }
             
             .pwa-banner-content {
                 display: flex;
                 align-items: center;
-                padding: 15px 20px;
-                gap: 15px;
+                padding: 16px 18px;
+                gap: 12px;
+                position: relative;
             }
-            
+
             .pwa-banner-icon img {
-                width: 50px;
-                height: 50px;
-                border-radius: 10px;
+                width: 45px;
+                height: 45px;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             }
-            
+
             .pwa-banner-text {
                 flex: 1;
+                padding-right: 10px;
             }
-            
+
             .pwa-banner-text h4 {
-                margin: 0 0 5px 0;
-                font-size: 16px;
+                margin: 0 0 4px 0;
+                font-size: 15px;
                 font-weight: 600;
+                color: #333;
             }
-            
+
             .pwa-banner-text p {
                 margin: 0;
-                font-size: 13px;
-                opacity: 0.8;
+                font-size: 12px;
+                opacity: 0.7;
+                color: #666;
+                line-height: 1.3;
             }
             
             .pwa-banner-actions {
                 display: flex;
-                gap: 10px;
+                flex-direction: column;
+                gap: 8px;
                 align-items: center;
+                min-width: 80px;
             }
-            
+
             .pwa-install-btn {
                 background: #ea272d;
                 color: white;
                 border: none;
-                padding: 10px 20px;
-                border-radius: 25px;
-                font-weight: 600;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-weight: 500;
+                font-size: 13px;
                 cursor: pointer;
                 transition: all 0.3s ease;
+                white-space: nowrap;
             }
-            
+
             .pwa-install-btn:hover {
                 background: #c21e24;
-                transform: translateY(-2px);
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(234, 39, 45, 0.3);
             }
-            
+
             .pwa-close-btn {
-                background: transparent;
-                color: white;
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                background: rgba(0,0,0,0.1);
+                color: #666;
                 border: none;
-                font-size: 24px;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                font-size: 16px;
                 cursor: pointer;
-                opacity: 0.7;
-                transition: opacity 0.3s ease;
+                opacity: 0.6;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
             }
-            
+
             .pwa-close-btn:hover {
                 opacity: 1;
+                background: rgba(234, 39, 45, 0.1);
+                color: #ea272d;
             }
             
             @keyframes slideUp {
@@ -220,31 +240,45 @@ class PWAManager {
             @media (max-width: 768px) {
                 .pwa-banner {
                     left: 10px;
-                    right: 10px;
                     bottom: 10px;
+                    max-width: 280px;
                 }
-                
+
                 .pwa-banner-content {
-                    padding: 12px 15px;
-                    gap: 12px;
+                    padding: 14px 16px;
+                    gap: 10px;
                 }
-                
+
                 .pwa-banner-icon img {
                     width: 40px;
                     height: 40px;
                 }
-                
+
                 .pwa-banner-text h4 {
                     font-size: 14px;
                 }
-                
+
                 .pwa-banner-text p {
+                    font-size: 11px;
+                }
+
+                .pwa-install-btn {
+                    padding: 6px 12px;
                     font-size: 12px;
                 }
-                
-                .pwa-install-btn {
-                    padding: 8px 16px;
+
+                .pwa-close-btn {
+                    width: 22px;
+                    height: 22px;
                     font-size: 14px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .pwa-banner {
+                    left: 5px;
+                    bottom: 5px;
+                    max-width: 260px;
                 }
             }
         `;
@@ -297,6 +331,9 @@ class PWAManager {
             setTimeout(() => {
                 banner.remove();
             }, 300);
+
+            // Marcar como cerrado por el usuario para no volver a mostrar en esta sesión
+            sessionStorage.setItem('pwa-banner-dismissed', 'true');
         }
     }
     
@@ -532,20 +569,45 @@ class PWAManager {
     
     // Verificar si debe mostrar banner de instalación
     checkInstallBanner() {
+        console.log('🔍 Checking if should show install banner...');
+
         // No mostrar si ya está instalado o es iOS Safari
         if (this.isInstalled || this.isIOSSafari()) {
+            console.log('❌ Banner not shown: App already installed or iOS Safari');
             return;
         }
-        
-        // Mostrar después de 5 segundos si no se ha mostrado antes
-        const hasSeenBanner = localStorage.getItem('pwa-banner-seen');
-        if (!hasSeenBanner) {
+
+        // Solo mostrar en dispositivos móviles
+        if (!this.isMobileDevice()) {
+            console.log('❌ Banner not shown: Not a mobile device');
+            return;
+        }
+
+        // No mostrar si ya fue cerrado en esta sesión
+        const wasDismissed = sessionStorage.getItem('pwa-banner-dismissed');
+        if (wasDismissed) {
+            console.log('❌ Banner not shown: Already dismissed in this session');
+            return;
+        }
+
+        // Verificar si no se ha mostrado hoy
+        const today = new Date().toDateString();
+        const lastShown = localStorage.getItem('pwa-banner-last-shown');
+
+        if (lastShown === today) {
+            console.log('❌ Banner not shown: Already shown today');
+            return;
+        }
+
+        // Si tenemos el deferredPrompt, mostrar inmediatamente
+        if (this.deferredPrompt) {
+            console.log('✅ Showing install banner for mobile device');
             setTimeout(() => {
-                if (this.deferredPrompt) {
+                if (!sessionStorage.getItem('pwa-banner-dismissed')) {
                     this.showInstallBanner();
-                    localStorage.setItem('pwa-banner-seen', 'true');
+                    localStorage.setItem('pwa-banner-last-shown', today);
                 }
-            }, 5000);
+            }, 3000); // Reducido a 3 segundos
         }
     }
     
@@ -555,6 +617,45 @@ class PWAManager {
         const iOS = !!ua.match(/iPad|iPhone|iPod/);
         const webkit = !!ua.match(/WebKit/);
         return iOS && webkit && !ua.match(/CriOS/);
+    }
+
+    // Verificar si es un dispositivo móvil
+    isMobileDevice() {
+        // Verificar por user agent (más estricto)
+        const mobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        // Verificar por tamaño de pantalla (debe ser consistente)
+        const mobileScreen = window.innerWidth <= 768 && window.outerWidth <= 768 && screen.width <= 768;
+
+        // Verificar si tiene capacidades táctiles reales (no mouse)
+        const touchDevice = ('ontouchstart' in window || navigator.maxTouchPoints > 0) &&
+                           !window.matchMedia('(pointer: fine)').matches;
+
+        // Verificar que no sea desktop (resolución muy alta indica desktop)
+        const notDesktop = screen.width <= 1024 && screen.height <= 1366;
+
+        // Verificar orientación (móviles suelen tener portrait por defecto)
+        const mobileOrientation = window.innerHeight > window.innerWidth ||
+                                 Math.abs(window.orientation) === 90;
+
+        // Es móvil solo si cumple TODAS las condiciones críticas
+        const realMobile = mobileUA && mobileScreen && notDesktop && (touchDevice || mobileOrientation);
+
+        // Log para debugging
+        console.log('📱 Mobile Detection:', {
+            userAgent: mobileUA,
+            screenSize: mobileScreen,
+            touch: touchDevice,
+            notDesktop: notDesktop,
+            orientation: mobileOrientation,
+            realMobile: realMobile,
+            innerWidth: window.innerWidth,
+            outerWidth: window.outerWidth,
+            screenWidth: screen.width,
+            screenHeight: screen.height
+        });
+
+        return realMobile;
     }
     
     // Convertir VAPID key
